@@ -2,12 +2,14 @@ import styled from 'styled-components'
 
 const AppHeaderStyledComponent = styled.div`
     .appheader-wrapper{
+        position: fixed;
+        top: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
-
+        width: 100vw;
         height: 50px;
-        border-bottom: 1px solid grey;
+        border-bottom: 1px solid #E8E8E8;
         
         .appheader-web{
             display: flex;
@@ -21,7 +23,7 @@ const AppHeaderStyledComponent = styled.div`
             .appheader-title{
                 padding-left: 10px;
                 font-weight: 900;
-                font-size: 25px;
+                font-size: 30px;
                 color: red;
                 cursor: pointer;
             }
