@@ -12,13 +12,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Install Dependencies
-        run: npm install
-      - name: Run Tests
-        env:
-          CI: true
-        run: npm test
+        run: yarn install
+      
       - name: Build
-        run: npm run build
+        run: yarn build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
