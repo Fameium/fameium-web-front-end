@@ -4,6 +4,7 @@ import AppLogo from '../../../assets/AppLogo'
 // import DropDownArrow from '../../../assets/DropDownArrow'
 import SignOutIcon from '../../../assets/SignOutIcon'
 import labels from '../../../data/labels.json'
+import theme from '../../../data/theme.json'
 import { useHistory } from 'react-router-dom';
 
 
@@ -19,11 +20,11 @@ const AppHeader = (props) => {
 
 
     return (
-        <AppHeaderStyledComponent>
+        <AppHeaderStyledComponent theme={theme}>
             <div className="appheader-wrapper">
                 <div className="appheader-web">
                     <div className="appheader__logo">
-                        <AppLogo color={'red'} style={{ height: '40px' }} />
+                        <AppLogo color={'red'} style={{ height: '30px' }} />
                     </div>
                     <div className="appheader-title">
                         Fameium

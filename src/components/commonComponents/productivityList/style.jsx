@@ -14,6 +14,7 @@ const ProductivityListStyled = styled.div`
             display: flex;
             flex-direction: row;
             align-items: center;
+            font-family: ${({ theme }) => theme.secondaryFont };
 
             :hover{
                 background-color: #E8E8E8;
@@ -23,7 +24,7 @@ const ProductivityListStyled = styled.div`
 
             .item__title{
                 font-size: 15px;
-                font-weight: 600;
+                font-weight: 500;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;

@@ -39,12 +39,14 @@ const ProductivityStyledComponent = styled.div`
                    margin-bottom: 20px;
 
                    .header__title{
+                    font-family: ${({ theme }) => theme.primaryFont };
                        font-size: 18px;
-                       font-weight: 900;
+                       font-weight: 600;
                        color: grey;
                    }
 
                    .header__button{
+                        font-family: ${({ theme }) => theme.secondaryFont };
                        font-size: 15px;
                        color: red;
                        padding: 5px 5px;
