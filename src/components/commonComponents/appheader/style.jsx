@@ -9,7 +9,9 @@ const AppHeaderStyledComponent = styled.div`
         justify-content: center;
         width: 100vw;
         height: 50px;
-        border-bottom: 1px solid #E8E8E8;
+        border-bottom: 1px solid ${({ theme }) => theme.headerBorder };
+        background-color: ${({ theme }) => theme.headerBackground };
+
         
         .appheader-web{
             display: flex;
@@ -25,7 +27,7 @@ const AppHeaderStyledComponent = styled.div`
                 padding-left: 10px;
                 font-weight: 300;
                 font-size: 30px;
-                color: red;
+                color: ${({ theme }) => theme.primaryHeaderColor };
                 cursor: pointer;
             }
         
@@ -37,6 +39,7 @@ const AppHeaderStyledComponent = styled.div`
                 margin-left: auto;
                 margin-right: 15px;
                 font-family: ${({ theme }) => theme.primaryFont };
+                color:  ${({ theme }) => theme.secondaryHeaderColor };
             
                 .menu__item{
                     margin-right: 10px;
@@ -45,13 +48,13 @@ const AppHeaderStyledComponent = styled.div`
                     cursor: pointer;
 
                     :hover{
-                        color: red;
+                        color: ${({ theme }) => theme.primaryHeaderColor };
                     }
                 }
 
             }
             .menu__item--active{
-                color: red;
+                color: ${({ theme }) => theme.primaryHeaderColor };
             }
 
             .signout{
@@ -61,7 +64,7 @@ const AppHeaderStyledComponent = styled.div`
 
                 :hover{
                     path{
-                        fill: black;
+                        fill: ${({ theme }) => theme.secondaryHeaderColor };
                     }
 
                 }

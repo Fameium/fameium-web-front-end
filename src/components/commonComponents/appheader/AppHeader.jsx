@@ -24,7 +24,7 @@ const AppHeader = (props) => {
             <div className="appheader-wrapper">
                 <div className="appheader-web">
                     <div className="appheader__logo">
-                        <AppLogo color={'red'} style={{ height: '30px' }} />
+                        <AppLogo color={theme.primaryHeaderColor} style={{ height: '30px' }} />
                     </div>
                     <div className="appheader-title">
                         Fameium
@@ -34,7 +34,7 @@ const AppHeader = (props) => {
                         <div className={AppHeaderProps && AppHeaderProps.activeTab === 'trendAnalysis' ? 'menu__item menu__item--active' : 'menu__item' }>{labels.trendAnalysis}</div>
                         <div className={AppHeaderProps && AppHeaderProps.activeTab === 'utilities' ? 'menu__item menu__item--active' : 'menu__item' }>{labels.utilities}</div>
                         <div className={AppHeaderProps && AppHeaderProps.activeTab === 'profile' ? 'menu__item menu__item--active' : 'menu__item'} >{labels.profile}</div>
-                        <div className="signout" onClick={doSignOutRitual}><SignOutIcon color={'red'} /></div> 
+                        <div className="signout" onClick={doSignOutRitual}><SignOutIcon color={theme.primaryHeaderColor} /></div> 
                     </div>
                 </div>
 
