@@ -3,6 +3,7 @@ import React from 'react'
 import ProductivityStyledComponent from './style'
 import AppHeader from '../../commonComponents/appheader/AppHeader'
 import ProductivityList from '../../commonComponents/productivityList/ProductivityList'
+import theme from '../../../data/theme.json'
 
 const Productivity = () => {
 
@@ -105,7 +106,7 @@ const Productivity = () => {
 
 
     return (
-        <ProductivityStyledComponent>
+        <ProductivityStyledComponent theme={theme}>
             <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
             <div className="productivity-wrapper">
                 <div className="productivity-list-wrapper">

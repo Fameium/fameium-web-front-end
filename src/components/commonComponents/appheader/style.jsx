@@ -21,8 +21,9 @@ const AppHeaderStyledComponent = styled.div`
                 cursor: pointer;
             }
             .appheader-title{
+                font-family: ${({ theme }) => theme.titleFont };
                 padding-left: 10px;
-                font-weight: 900;
+                font-weight: 300;
                 font-size: 30px;
                 color: red;
                 cursor: pointer;
@@ -35,6 +36,7 @@ const AppHeaderStyledComponent = styled.div`
                 align-items: center;
                 margin-left: auto;
                 margin-right: 15px;
+                font-family: ${({ theme }) => theme.primaryFont };
             
                 .menu__item{
                     margin-right: 10px;
