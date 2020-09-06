@@ -34,10 +34,12 @@ const AppHeaderStyledComponent = styled.div`
                 flex-direction: row;
                 align-items: center;
                 margin-left: auto;
+                margin-right: 15px;
             
                 .menu__item{
                     margin-right: 10px;
                     font-weight: 600;
+                    padding: auto 0px;
                     cursor: pointer;
 
                     :hover{
@@ -49,6 +51,21 @@ const AppHeaderStyledComponent = styled.div`
             .menu__item--active{
                 color: red;
             }
+
+            .signout{
+                cursor: pointer;
+                height: 20px;
+                margin-right: 10px;
+
+                :hover{
+                    path{
+                        fill: black;
+                    }
+
+                }
+            }
+
+           
 
         }
     }
