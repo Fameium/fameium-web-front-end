@@ -32,7 +32,7 @@ const AppHeaderStyledComponent = styled.div`
             }
         
 
-            .appheader__menu{
+            .appheader__menu--web{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -40,6 +40,10 @@ const AppHeaderStyledComponent = styled.div`
                 margin-right: 15px;
                 font-family: ${({ theme }) => theme.primaryFont };
                 color:  ${({ theme }) => theme.secondaryHeaderColor };
+
+                @media screen and (max-width: 900px){
+                    display: none;
+                }
             
                 .menu__item{
                     margin-right: 10px;
@@ -70,9 +74,41 @@ const AppHeaderStyledComponent = styled.div`
                 }
             }
 
-           
+            .hamburger{
+                height: 20px;
+                margin-right: 10px;
+                margin-left: auto;
 
+                @media screen and (min-width: 900px){
+                    display: none;
+                }
+            }
         }
+        
+        .appheader__menu--mobile{
+            width: 100vw;
+            height: calc(100vh - 50px);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 50px;
+            align-items: center;
+            background-color: white;
+
+            .menu__item{
+                width: 100vw;
+                border-bottom: 1px solid grey;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                text-align: center;
+                font-weight: 600;
+            }
+            .menu__item--active{
+                color: ${({ theme }) => theme.primaryHeaderColor };
+                font-weight: 900;
+            }
+        }
+
     }
 
     
