@@ -1,12 +1,15 @@
-// import React, { useEffect, useState } from 'react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductivityStyledComponent from './style'
 import AppHeader from '../../commonComponents/appheader/AppHeader'
+import ProductivityFooter from '../../commonComponents/ProductivityFooter/ProductivityFooter'
 import ProductivityList from '../../commonComponents/productivityList/ProductivityList'
 import theme from '../../../data/theme.json'
 
 const Productivity = () => {
 
+    const [activeTab, setActiveTab] = useState('projects')
+    const [dataForMobileView, setDataForMobileView] = useState(null)
+    const [mobileViewTitle, setMobileViewTitle] = useState(null)
 
     const projectData = {
         "projects": [
@@ -104,17 +107,39 @@ const Productivity = () => {
         ]
     }
 
+    useEffect(() => { //This is applicable only in mobile view
+        if (activeTab === 'projects') {
+            setDataForMobileView(projectData.projects)
+            setMobileViewTitle('Projects')
+        }
+        if (activeTab === 'ideas') {
+            setDataForMobileView(projectData.projects)
+            setMobileViewTitle('Ideas')
+
+        }
+        if (activeTab === 'sponsorships') {
+            setDataForMobileView(projectData.projects)
+            setMobileViewTitle('Sponsorships')
+
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeTab])
+
+    const onFooterClick = (e) => {
+        setActiveTab(e)
+    }
+
 
     return (
         <ProductivityStyledComponent theme={theme}>
             <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
             <div className="productivity-wrapper">
-                <div className="productivity-list-wrapper">
+                <div className="productivity-list-wrapper-web">
                     <div className="productivity__list">
-                    <div className="list__header">
-                        <div className="header__title">Projects</div>
-                        <div className="header__button">New Project</div>
-                    </div>
+                        <div className="list__header">
+                            <div className="header__title">Projects</div>
+                            <div className="header__button">New Project</div>
+                        </div>
                         <div className="list"><ProductivityList data={projectData.projects} /></div>
                     </div>
                     <div className="productivity__list">
@@ -133,7 +158,15 @@ const Productivity = () => {
 
                     </div>
                 </div>
+                <div className="productivity-list-wrapper-mobile">
+                    <div className="productivity__header">
+                        <div className="header__title">{mobileViewTitle}</div>
+                    </div>
+                    <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} /></div>
+                </div>
             </div>
+            <ProductivityFooter activeTab={activeTab} onClickFunction={onFooterClick} />
+
         </ProductivityStyledComponent>
     )
 }

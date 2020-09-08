@@ -19,7 +19,12 @@ const ProductivityStyledComponent = styled.div`
             }
        }
    
-       .productivity-list-wrapper{
+       .productivity-list-wrapper-web{
+            @media screen and (max-width: 900px){
+                display: none;
+            }
+
+
            display: flex;
            flex-direction: row;
 
@@ -63,12 +68,25 @@ const ProductivityStyledComponent = styled.div`
                }
 
             }
-
-           
-
-        
-
        }
+
+       .productivity-list-wrapper-mobile{
+        padding: 0px 20px;
+            @media screen and (min-width: 900px){
+                display: none;
+            }
+
+            .productivity__header{
+                .header__title{
+                    font-family: ${({ theme }) => theme.primaryFont };
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: grey;
+                    margin: 10px 0px;
+                }
+            }
+       }
+
     }
     
 
