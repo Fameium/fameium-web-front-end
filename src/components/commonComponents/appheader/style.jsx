@@ -11,6 +11,7 @@ const AppHeaderStyledComponent = styled.div`
         height: 50px;
         border-bottom: 1px solid ${({ theme }) => theme.headerBorder };
         background-color: ${({ theme }) => theme.headerBackground };
+        z-index: 5;
 
         
         .appheader-web{
@@ -94,6 +95,7 @@ const AppHeaderStyledComponent = styled.div`
             top: 50px;
             align-items: center;
             background-color: white;
+            z-index: 3;
 
             .menu__item{
                 width: 100vw;

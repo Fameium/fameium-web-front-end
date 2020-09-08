@@ -4,6 +4,7 @@ import AppHeader from '../../commonComponents/appheader/AppHeader'
 import ProductivityFooter from '../../commonComponents/ProductivityFooter/ProductivityFooter'
 import ProductivityList from '../../commonComponents/productivityList/ProductivityList'
 import theme from '../../../data/theme.json'
+import AddButtonIcon from '../../../assets/AddButtonIcon'
 
 const Productivity = () => {
 
@@ -163,6 +164,7 @@ const Productivity = () => {
                         <div className="header__title">{mobileViewTitle}</div>
                     </div>
                     <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} /></div>
+                    <div className="add-button"><AddButtonIcon color='red' /></div>
                 </div>
             </div>
             <ProductivityFooter activeTab={activeTab} onClickFunction={onFooterClick} />
