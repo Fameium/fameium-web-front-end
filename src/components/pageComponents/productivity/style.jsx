@@ -85,6 +85,12 @@ const ProductivityStyledComponent = styled.div`
                     margin: 10px 0px;
                 }
             }
+
+            .add-button{
+                position: fixed;
+                bottom: 50px;
+                right: 15px;
+            }
        }
 
     }
