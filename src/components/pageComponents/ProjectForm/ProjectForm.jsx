@@ -16,41 +16,57 @@ const ProjectForm = () => {
                 </div>
                 <div className="form-wrapper">
                     <div className="form-column-1">
-                        <div className="field-title">Project Name</div>
-                        <input className="field-input gs_border-radius" type='text' />
+                        <div className="form-section">
+                            <div className="title">Project Name</div>
+                            <input type="text" size='1' />
+                        </div>
+                        <div className="form-section">
+                            <div className="title">Description</div>
+                            <textarea />
+                        </div>
+                        <div className="form-section">
+                            <div className="title">Notes</div>
+                            <textarea />
+                        </div>
 
-                        <div className="field-title">Description</div>
-                        <textarea className="field-input description" />
-
-                        <div className="field-title">Notes</div>
-                        <textarea className="field-input description" />
-
-                        <div className="inline">
-                            <div className="inline-group-start-date">
-                                <div className="field-title">Start date</div>
-                                <input className="field-input date" type='date' />
+                        <div className="inline-one form-section">
+                            <div class='one' type='text' size='1' >
+                                <div className="form-section">
+                                    <div className="title">Start Date</div>
+                                    <input type="date" size='1' />
+                                </div>
                             </div>
-                            <div className="inline-group-sponsorships">
-                                <div className="field-title">Sponsorship</div>
-                                <input className="field-input sponsorship" type='date' />
+                            <div class='two' type='text' size='1' >
+                                <div className="form-section">
+                                    <div className="title">Sponsorships</div>
+                                    <div className="sponsorship-button">Select a Sponsor</div>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="inline">
-                            <div className="inline-group-end-date">
-                                <div className="field-title">End date</div>
-                                <input className="field-input date" type='date' />
+                        <div className="inline-two form-section">
+                            <div class='one' type='text' size='1' >
+                                <div className="form-section">
+                                    <div className="title">End Date</div>
+                                    <input type="date" size='1' />
+                                </div>
                             </div>
-                            <div className="inline-group-status">
-                                <div className="field-title">End date</div>
-                                <input className="field-input status" type='date' />
+                            <div class='two' type='text' size='1' >
+                                <div className="form-section status-wrapper">
+                                    <div className="title">Status</div>
+                                    <div className="sponsorship-button">Select a Sponsor</div>
+                                </div>
+                                <div className="save-button ">Save</div>
+
                             </div>
-                            <div className="inline-group-button">Save</div>
                         </div>
 
 
                     </div>
-                    <div className="form-column-2"></div>
+                    <div className="form-column-2 form-section">
+                        <input type='text' />
+
+                    </div>
                 </div>
 
             </div>

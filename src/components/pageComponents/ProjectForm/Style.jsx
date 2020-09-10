@@ -4,13 +4,14 @@ const ProjectFormStyledComponent = styled.div`
     .form-desktop-wrapper{
         display: flex;
         flex-direction: column;
-        width: 100vw;
-        margin-top: 50px;
+        overflow: hidden;
+        margin-top: 10px;
+        padding: 0px 3vw;
 
         .form-header{
             display: flex;
             flex-direction: row;
-            margin: 68px 35px 0px 35px;
+            margin: 68px 0px 0px;
             padding-bottom: 5px;
             border-bottom: 1px solid grey;
             align-items: baseline;
@@ -26,101 +27,110 @@ const ProjectFormStyledComponent = styled.div`
                 font-weight: 300;
                 font-family: ${({ theme }) => theme.secondaryFont };
                 color: #7e7e7e;
-
-
             }
-
         }
+
+        .form-section{ margin-bottom: 10px; }
+        .title{ size: 18px; 
+            margin-bottom: 5px; 
+            font-family: ${({ theme }) => theme.primaryFont }; 
+            font-weight: 500;
+        }
+
         .form-wrapper{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             min-height: 50vh; /**tbr */
-            margin: 27px 35px 0px 35px;
+            margin: 27px 0px 0px;
+            background-color: yellow; /**tbr */
+            @media screen and (max-width: 900px){ flex-wrap: wrap; }
+
+            
+            input, textarea{
+                box-sizing:border-box; 
+                padding: 14px 10px; 
+                outline: 0px; 
+                border-radius: 5px;
+                border: solid 1px grey;/**QQQ */ 
+                font-family: ${({ theme }) => theme.secondaryFont }; 
+            }
+            input{ width: 100% }
+            textarea{ min-width:100%; min-height: 100px; max-width: 88.5vw;
+             @media screen and (min-width: 900px){ max-width: 44vw; }
+             }
+
             .form-column-1{
-                width: 45vw;
-                /* background-color: green; *tbr */
+                display: flex;
+                flex-direction: column;
+                flex-basis: 50%;
+                /* background-color: green;*tbr */
+                padding-right: 20px;
+                @media screen and (max-width: 900px){ padding-right: 0px; flex: 0 0 100%; }
             }
             .form-column-2{
-                width: 45vw;
-                background-color: blue; /**tbr */
+                display: flex;
+                flex-direction: column;
+                flex-basis: 50%; 
+                background-color: red;/**tbr */
+                padding-left: 20px;
+                @media screen and (max-width: 900px){ padding-left: 0px; flex: 0 0 100%; }
             }
 
-            .field-title{
-                font-family: ${({ theme }) => theme.primaryFont };
-                font-weight: 500;
-                color: black /**QQQ */
-                font-size: 18px;
-                margin-bottom: 6px;
-
-            }
-
-            .field-input{
-                border: 1px solid #7e7e7e;
-                font-family: ${({ theme }) => theme.secondaryFont };
-                padding: 14px 15px 14px 15px;
-                font-size: 14px;
-                width: 40vw;
-                margin-bottom: 20px;
-                outline: 0;
-                :focus{
-                    border-color: red; /**QQQ */
-                }
-
-            }
-
-            .description{ height: 106px; width:40vw; max-width:40vw; min-width:40vw; }
-
-            .inline{
+            .inline-one{
                 display: flex;
                 flex-direction: row;
-                align-items: flex-end;
+                .one{ flex: 1; }
+                .two{ flex: 2; margin-left: 20px; }
             }
 
-            .inline-group-start-date{
-                /* max-width: 150px; */
-                flex-grow: 1;
-            }
+            .inline-two{
+                display: flex;
+                flex-direction: row;
+                .one{ flex: 1; }
+                .two{ 
+                    flex: 2; 
+                    margin-left: 20px; 
+                    display: flex;
+                    .status-wrapper{ 
+                        flex: 1;  
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis; 
+                    }
+                    .save-button{ 
+                        flex: 1; 
+                        margin-left: 20px; 
+                        text-align: center;
+                        border-radius: 5px;
+                        border: 1px solid red;
+                        margin-top: auto;
+                        margin-bottom: 10px;
+                        padding: 13px 10px;
+                        color: red;
+                        font-size: 17px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        :hover{
+                            background-color: red;
+                            color: white;
+                        }
+                    }
 
-            .inline-group-sponsorships{
-                /* max-width: 150px; */
-                flex-grow: 2;
-                margin-left: calc(40vw - 335px);
-            }
-            .date{
-                /* width: 100px; */
-                
-            }
-            .sponsorship{
-                /* width: 200px; */
-            }
 
-            .status{
-                width: 100px;
-
-            }
-            .inline-group-status{
-                margin-left: 3vw;
-            }
-            .inline-group-button{
-                margin-left: 3vw;
-                height: 20px;
-                font-family: ${({ theme }) => theme.primaryFont };
-                font-size: 20px;
-                color: #000;
-                border: 1px solid red;
-                margin-bottom: 20px;
-                font-weight: 600;
-                color: red;
-                padding: 12px 10px;
-                border-radius: 5px;
-                text-align: center;
-                cursor: pointer;
-                :hover{
-                    color: white;
-                    background-color: red;
                 }
             }
+
+            .sponsorship-button{
+                font-family: ${({ theme }) => theme.secondaryFont }; 
+                font-size: 17px;
+                background-color: green;
+                border-radius: 5px;
+                padding: 14px 10px; 
+                border: 1px solid grey;
+
+            }
+
 
         }
 
