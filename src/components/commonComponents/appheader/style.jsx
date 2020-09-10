@@ -9,8 +9,8 @@ const AppHeaderStyledComponent = styled.div`
         justify-content: center;
         width: 100vw;
         height: 50px;
-        border-bottom: 1px solid ${({ theme }) => theme.headerBorder };
-        background-color: ${({ theme }) => theme.headerBackground };
+        border-bottom: 1px solid ${({ theme }) => theme.headerBorder};
+        background-color: ${({ theme }) => theme.headerBackground};
         z-index: 5;
 
         
@@ -22,25 +22,28 @@ const AppHeaderStyledComponent = styled.div`
             .appheader__logo{
                 margin-left: 10px;
                 cursor: pointer;
+                svg{ height: 30px; }
+                @media screen and (max-width: 900px){ svg{ height: 20px; } }
             }
             .appheader-title{
-                font-family: ${({ theme }) => theme.titleFont };
+                font-family: ${({ theme }) => theme.titleFont};
                 padding-left: 10px;
                 font-weight: 300;
                 font-size: 30px;
-                color: ${({ theme }) => theme.primaryHeaderColor };
+                color: ${({ theme }) => theme.primaryHeaderColor};
                 cursor: pointer;
+                @media screen and (max-width: 900px){ font-size: 20px; }
             }
         
-
+            .hamburger{ svg{ height: 20px; } }
             .appheader__menu--web{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 margin-left: auto;
                 margin-right: 15px;
-                font-family: ${({ theme }) => theme.primaryFont };
-                color:  ${({ theme }) => theme.secondaryHeaderColor };
+                font-family: ${({ theme }) => theme.primaryFont};
+                color:  ${({ theme }) => theme.secondaryHeaderColor};
 
                 @media screen and (max-width: 900px){
                     display: none;
@@ -53,13 +56,13 @@ const AppHeaderStyledComponent = styled.div`
                     cursor: pointer;
 
                     :hover{
-                        color: ${({ theme }) => theme.primaryHeaderColor };
+                        color: ${({ theme }) => theme.primaryHeaderColor};
                     }
                 }
 
             }
             .menu__item--active{
-                color: ${({ theme }) => theme.primaryHeaderColor };
+                color: ${({ theme }) => theme.primaryHeaderColor};
             }
 
             .signout{
@@ -69,7 +72,7 @@ const AppHeaderStyledComponent = styled.div`
 
                 :hover{
                     path{
-                        fill: ${({ theme }) => theme.secondaryHeaderColor };
+                        fill: ${({ theme }) => theme.secondaryHeaderColor};
                     }
 
                 }
@@ -77,7 +80,7 @@ const AppHeaderStyledComponent = styled.div`
 
             .hamburger{
                 height: 20px;
-                margin-right: 30px;
+                margin-right: 10px;
                 margin-left: auto;
 
                 @media screen and (min-width: 900px){
@@ -97,6 +100,8 @@ const AppHeaderStyledComponent = styled.div`
             background-color: white;
             z-index: 3;
 
+        
+
             .menu__item{
                 width: 100vw;
                 border-bottom: 1px solid grey;
@@ -106,7 +111,7 @@ const AppHeaderStyledComponent = styled.div`
                 font-weight: 600;
             }
             .menu__item--active{
-                color: ${({ theme }) => theme.primaryHeaderColor };
+                color: ${({ theme }) => theme.primaryHeaderColor};
                 font-weight: 900;
             }
         }

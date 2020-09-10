@@ -20,6 +20,7 @@ const ProjectFormStyledComponent = styled.div`
                 font-weight: bold;
                 font-family: ${({ theme }) => theme.primaryFont };
                 color: red; /**QQQ */
+
             }
             .header-last-edit{
                 margin-left: auto;
@@ -30,11 +31,17 @@ const ProjectFormStyledComponent = styled.div`
             }
         }
 
-        .form-section{ margin-bottom: 10px; }
+        .form-section{ 
+            margin-bottom: 10px; 
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;     
+        }
         .title{ size: 18px; 
             margin-bottom: 5px; 
             font-family: ${({ theme }) => theme.primaryFont }; 
-            font-weight: 500;
+            font-weight: 900;
+            min-width: 0px;
         }
 
         .form-wrapper{
@@ -110,6 +117,7 @@ const ProjectFormStyledComponent = styled.div`
                         font-size: 17px;
                         font-weight: 600;
                         cursor: pointer;
+                        max-height: 50px;
                         :hover{
                             background-color: red;
                             color: white;
@@ -132,6 +140,9 @@ const ProjectFormStyledComponent = styled.div`
                 border-radius: 5px;
                 padding: 14px 10px; 
                 border: 1px solid grey;
+                white-space: nowrap;
+                overflow: hidden;
+                max-height: 30px;
 
             }
 

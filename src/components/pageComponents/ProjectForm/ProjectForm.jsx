@@ -33,7 +33,7 @@ const ProjectForm = () => {
                             <div class='one' type='text' >
                                 <div className="form-section">
                                     <div className="title">Start Date</div>
-                                    <input type="date" class='date' size='0' />
+                                    <input type="date" class='date' size='1' />
                                 </div>
                             </div>
                             <div class='two' type='text' size='0' >

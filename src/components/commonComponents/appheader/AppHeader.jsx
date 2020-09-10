@@ -28,7 +28,7 @@ const AppHeader = (props) => {
             <div className="appheader-wrapper">
                 <div className="appheader-web">
                     <div className="appheader__logo">
-                        <AppLogo color={theme.primaryHeaderColor} style={{ height: '30px' }} />
+                        <AppLogo color={theme.primaryHeaderColor} />
                     </div>
                     <div className="appheader-title">
                         Fameium

@@ -21,11 +21,7 @@ Hamburger.propTypes = {
 }
 
 Hamburger.defaultProps = {
-    color: 'red',
-    style: {
-        width: 25,
-        height: 25
-    }
+    color: 'red'
 }
 
 export default Hamburger
