@@ -43,7 +43,6 @@ const ProjectFormStyledComponent = styled.div`
             justify-content: space-between;
             min-height: 50vh; /**tbr */
             margin: 27px 0px 0px;
-            background-color: yellow; /**tbr */
             @media screen and (max-width: 900px){ flex-wrap: wrap; }
 
             
@@ -119,6 +118,11 @@ const ProjectFormStyledComponent = styled.div`
 
 
                 }
+            }
+
+            .date{/**Over riding default width of date input field */
+                width: 0;
+                min-width: 100%;
             }
 
             .sponsorship-button{

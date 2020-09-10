@@ -30,13 +30,13 @@ const ProjectForm = () => {
                         </div>
 
                         <div className="inline-one form-section">
-                            <div class='one' type='text' size='1' >
+                            <div class='one' type='text' >
                                 <div className="form-section">
                                     <div className="title">Start Date</div>
-                                    <input type="date" size='1' />
+                                    <input type="date" class='date' size='0' />
                                 </div>
                             </div>
-                            <div class='two' type='text' size='1' >
+                            <div class='two' type='text' size='0' >
                                 <div className="form-section">
                                     <div className="title">Sponsorships</div>
                                     <div className="sponsorship-button">Select a Sponsor</div>
@@ -48,7 +48,7 @@ const ProjectForm = () => {
                             <div class='one' type='text' size='1' >
                                 <div className="form-section">
                                     <div className="title">End Date</div>
-                                    <input type="date" size='1' />
+                                    <input type="date" className='date' size='1' />
                                 </div>
                             </div>
                             <div class='two' type='text' size='1' >
