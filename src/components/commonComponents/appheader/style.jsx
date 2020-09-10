@@ -77,7 +77,7 @@ const AppHeaderStyledComponent = styled.div`
 
             .hamburger{
                 height: 20px;
-                margin-right: 10px;
+                margin-right: 30px;
                 margin-left: auto;
 
                 @media screen and (min-width: 900px){
