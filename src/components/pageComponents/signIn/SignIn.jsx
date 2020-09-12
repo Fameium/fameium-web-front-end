@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
-import labels from '../../../data/labels.json'
 import SignInStyledComponent from './style'
 import { useHistory } from 'react-router-dom';
 import AppHeader from '../../commonComponents/appheader/AppHeader'
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 
 const SignIn = () => {
 
@@ -11,43 +16,75 @@ const SignIn = () => {
 
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
+    const [showLoading, setShowLoading] = useState(false)
+    const [showSnackbar, setShowSnackbar] = useState(false)
 
     const logicProp = { prop: 'send logic prop' }
     const themeProp = { theme: 'send theme' }
 
     const onSignInClick = () => {
-        localStorage.setItem('isAuthenticated', true)
-        history.push('/productivity')
+        // localStorage.setItem('isAuthenticated', true)
+        // history.push('/productivity')
+        setShowLoading(true)
+        const header = {
+            Authorization: 'Basic ' + new Buffer(userName + ':' + password).toString('base64')
+        }
+        console.log('header', header)
+
+        const requestOptions = {
+            method: 'POST',
+            headers: header
+        };
+
+        fetch('https://api-dev.fameium.com/login/', requestOptions)
+            .then((res) => {
+                setShowLoading(false)
+                if (res.ok) {
+
+                    localStorage.setItem('isAuthenticated', true)
+                    history.push('/productivity')
+                }
+                else {
+                    setShowSnackbar(true)
+
+
+                }
+            }
+            )
+            .catch((error) => {
+                setShowLoading(false)
+                setShowSnackbar(true)
+            })
     }
+
+    const handleClose = () => {
+        setShowSnackbar(false)
+    }
+
+
 
     return (
         <SignInStyledComponent logicProp={logicProp} themeProp={themeProp} >
             <AppHeader />
-            <div className="signin-wrapper">
-                <div className="signin-art">
-                </div>
-                <div className="signin-form">
-                    <div className="input-set">
-                        <div className="uername-title">Username/email</div>
-                        <input type="text" className='username' value={userName} onChange={e => setUserName(e.target.value)} />
+            <div className="login-wrapper">
+                <div className="col-1"></div>
+                <div className="col-2">
+                    <TextField fullWidth id="outlined-basic" color="secondary" label="Username" variant="outlined" className='field' value={userName} onChange={(e) => setUserName(e.target.value)} />
+                    <TextField fullWidth id="outlined-basic" color="secondary" label="password" variant="outlined" type='password' className='field' value={password} onChange={(e) => setPassword(e.target.value)} />
 
-                    </div>
-                    <div className="input-set">
-                        <div className="password-title">Password</div>
-                        <input type="password" className='password' value={password} onChange={e => setPassword(e.target.value)} />
-                    </div>
-                    <div className="button-set">
-                        <div className="signin__button" onClick={onSignInClick}>{labels.signIn}</div>
-                        <div className="forgot-buttons">
-                            <div className="forgot-text">Forgot </div> 
-                            <div className="forgot__username link" >Username </div>/
-                            <div className="forgot__password link"> Password </div>?
-                        </div>
-                    </div>
-
+                    <Button variant="contained" color="secondary" className='login-button field' onClick={onSignInClick} > Login </ Button>
+                    {showLoading && <CircularProgress color="secondary" />}
+                    <Snackbar
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                        open={showSnackbar}
+                        onClose={handleClose}
+                        message="Oops! Wrong credentials"
+                        
+                    />
                 </div>
             </div>
-        </SignInStyledComponent>
+
+        </SignInStyledComponent >
     )
 }
 export default SignIn
