@@ -7,6 +7,9 @@ import SignIn from '../src/components/pageComponents/signIn/SignIn'
 import Productivity from '../src/components/pageComponents/productivity/Productivity'
 import PtojectForm from '../src/components/pageComponents/ProjectForm/ProjectForm'
 import GeneralStyles from './GeneralStyles'
+
+import Test from './Test'
+
 const App = () => {
   return (
     <GeneralStyles>
@@ -19,6 +22,7 @@ const App = () => {
           <Route exact path='/productivity' component={Productivity} />
           <Route exact path='/project/:id/edit' component={PtojectForm} />
           <Route exact path='/productivity/new-project' component={PtojectForm} />
+          <Route exact path='/test' component={Test} />
 
 
           <Route render={() => <Redirect to={{ pathname: "/" }} />} />
