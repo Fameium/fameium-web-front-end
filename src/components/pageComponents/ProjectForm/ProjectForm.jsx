@@ -50,11 +50,11 @@ const ProjectForm = () => {
                     <TextField label="Project Name" className={classes.TextField} color="secondary" />
                     <TextField label="Description" multiline className={classes.TextField} color='secondary' />
                     <TextField label="Notes" multiline className={classes.TextField} color='secondary' />
-                    <Grid container item xs={12} alignItems='flex-end'>
+                    <Grid container item  alignItems='flex-end'>
                         <Grid xs={4} item style={{paddingRight: '10px'}}> <TextField label="Start Date" defaultValue="2017-05-24"  type='date' fullWidth  className={classes.TextField} color='secondary' /> </Grid>
                         <Grid xs={8} item> <Button variant="outlined" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} >Sponsorship</Button> </Grid>
                     </Grid>
-                    <Grid container item xs={12} alignItems='flex-end'>
+                    <Grid container item  alignItems='flex-end'>
                         <Grid xs={4} item style={{paddingRight: '10px'}}> <TextField label="Start Date" type='date' defaultValue="2017-05-24"  className={classes.TextField} color='secondary' fullWidth /> </Grid>
                         <Grid xs={4} item style={{paddingRight: '10px'}}> <Button variant="outlined" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} >Status</Button> </Grid>
                         <Grid xs={4} item style={{paddingLeft: '10px'}}><Button variant="outlined" color="secondary" size="large" varient='filled' className={classes.TextField} fullWidth startIcon={<MonetizationOnIcon />} >SAVE</Button></Grid>
