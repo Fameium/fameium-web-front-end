@@ -1355,6 +1355,7 @@
     react-is "^16.8.0"
     react-transition-group "^4.4.0"
 
+
 "@material-ui/icons@^4.9.1":
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.9.1.tgz#fdeadf8cb3d89208945b33dbc50c7c616d0bd665"
@@ -3118,6 +3119,7 @@ clone-deep@^4.0.1:
     is-plain-object "^2.0.4"
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
+
 
 clone@^2.1.1:
   version "2.1.2"
