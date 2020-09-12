@@ -5,12 +5,15 @@ import ProductivityFooter from '../../commonComponents/ProductivityFooter/Produc
 import ProductivityList from '../../commonComponents/productivityList/ProductivityList'
 import theme from '../../../data/theme.json'
 import AddButtonIcon from '../../../assets/AddButtonIcon'
+import { useHistory } from 'react-router-dom';
+
 
 const Productivity = () => {
 
     const [activeTab, setActiveTab] = useState('projects')
     const [dataForMobileView, setDataForMobileView] = useState(null)
     const [mobileViewTitle, setMobileViewTitle] = useState(null)
+    const history = useHistory()
 
     const projectData = {
         "projects": [
@@ -139,7 +142,7 @@ const Productivity = () => {
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Projects</div>
-                            <div className="header__button">New Project</div>
+                            <div className="header__button" onClick={() => history.push('/productivity/new-project')}>New Project</div>
                         </div>
                         <div className="list"><ProductivityList data={projectData.projects} /></div>
                     </div>
@@ -164,7 +167,7 @@ const Productivity = () => {
                         <div className="header__title">{mobileViewTitle}</div>
                     </div>
                     <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} /></div>
-                    <div className="add-button"><AddButtonIcon color='red' /></div>
+                    <div className="add-button" onClick={() => history.push('/productivity/new-project')}><AddButtonIcon color='red' /></div>
                 </div>
             </div>
             <ProductivityFooter activeTab={activeTab} onClickFunction={onFooterClick} />
