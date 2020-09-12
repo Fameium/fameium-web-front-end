@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import ProjectFormStyledComponent from './Style'
 import AppHeader from '../../commonComponents/appheader/AppHeader'
 import theme from '../../../data/theme.json'
 import { Grid, Typography, makeStyles, TextField, Button } from '@material-ui/core'
 // import SaveIcon from '@material-ui/icons/Save'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-import {Editor, EditorState} from 'draft-js';
 import ReactQuill from 'react-quill'; // ES6
 import 'react-quill/dist/quill.snow.css'; // ES6
 
