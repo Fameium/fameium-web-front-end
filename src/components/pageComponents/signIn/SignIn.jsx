@@ -36,7 +36,7 @@ const SignIn = () => {
             headers: header
         };
 
-        fetch('https://fameium-dev.ap-south-1.elasticbeanstalk.com/login/', requestOptions)
+        fetch('https://api-dev.fameium.com/login/', requestOptions)
             .then((res) => {
                 setShowLoading(false)
                 if (res.ok) {
