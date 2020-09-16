@@ -9,7 +9,7 @@ import ReactQuill from 'react-quill'; // ES6
 import 'react-quill/dist/quill.snow.css'; // ES6
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     mainContainer: {
         padding: '0px 8px',
         marginTop: '50px',
