@@ -7,9 +7,10 @@ const ProductivityList = ({ data }) => {
     return(
     <ProductivityListStyled theme={theme}>
         <div className="productivitylist">
+            {console.log('list', data)}
             {data && data.map(e => {
                 return <div className="list__item" id={e.id}>
-                   <div className="item__title">{e.title}</div> 
+                   <div className="item__title">{e.name}</div> 
                 </div>
             })}
         </div>

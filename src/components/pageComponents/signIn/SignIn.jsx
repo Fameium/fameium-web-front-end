@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import SignInStyledComponent from './style'
 import { useHistory } from 'react-router-dom';
 import AppHeader from '../../commonComponents/appheader/AppHeader'
@@ -6,8 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-
+import utilFunctions from '../../../utilityFunctions/localStorage'
+import api from './../../../APIs/api'
+import apiSupportFunctions from './../../../APIs/apiSupportFunctions'
+import { MasterContext } from '../../../context/MasterContext'
 
 const SignIn = () => {
 
@@ -18,30 +20,35 @@ const SignIn = () => {
     const [password, setPassword] = useState('')
     const [showLoading, setShowLoading] = useState(false)
     const [showSnackbar, setShowSnackbar] = useState(false)
-
-    const logicProp = { prop: 'send logic prop' }
-    const themeProp = { theme: 'send theme' }
+    const { post } = api()
+    const { base64 } = apiSupportFunctions
+    const { setItem } = utilFunctions
+    const { MasterDispatch } = useContext(MasterContext)
 
     const onSignInClick = () => {
         // localStorage.setItem('isAuthenticated', true)
         // history.push('/productivity')
         setShowLoading(true)
         const header = {
-            Authorization: 'Basic ' + new Buffer(userName + ':' + password).toString('base64')
+            Authorization: base64(userName, password)
         }
-        console.log('header', header)
 
-        const requestOptions = {
-            method: 'POST',
-            headers: header
-        };
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: header
+        // };
 
-        fetch('https://api-dev.fameium.com/login/', requestOptions)
+        post('login', {}, header, {} )
             .then((res) => {
+                console.log('res done', res.data)
                 setShowLoading(false)
-                if (res.ok) {
+                if (res.status === 200) {
 
-                    localStorage.setItem('isAuthenticated', true)
+                    setItem('auth-data',  res.data)
+                    MasterDispatch({ type: 'SET_TOKEN', value: res.data.token })
+                    MasterDispatch({ type: 'SET_TOKEN_HEADER', value: { Authorization: `token ${res.data.token}` } })
+                    MasterDispatch({ type: 'SET_PROFILE', value: res.data.user })
+                    MasterDispatch({ type: 'SET_ACTIVE_TENANT', value: res.data.user.tenants[0].id })
                     history.push('/productivity')
                 }
                 else {
@@ -52,6 +59,8 @@ const SignIn = () => {
             }
             )
             .catch((error) => {
+                console.log('err done', error)
+
                 setShowLoading(false)
                 setShowSnackbar(true)
             })
@@ -64,7 +73,7 @@ const SignIn = () => {
 
 
     return (
-        <SignInStyledComponent logicProp={logicProp} themeProp={themeProp} >
+        <SignInStyledComponent  >
             <AppHeader />
             <div className="login-wrapper">
                 <div className="col-1"></div>
