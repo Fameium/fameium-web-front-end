@@ -71,7 +71,7 @@ const Productivity = () => {
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Projects</div>
-                            <div className="header__button" onClick={() => history.push('/productivity/new-project')}>New Project</div>
+                            <div className="header__button" onClick={() => history.push('/productivity/project/new')}>New Project</div>
                         </div>
                         <div className="list"><ProductivityList data={projects} /></div>
                     </div>
