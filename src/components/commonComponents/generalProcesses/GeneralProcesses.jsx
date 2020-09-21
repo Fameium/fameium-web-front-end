@@ -5,7 +5,7 @@ import utilFunctions from '../../../utilityFunctions/localStorage'
 
 const GeneralProcesses = () => {//This compoenent doesn't render anything. It just includes some general function that are active always.
     const history = useHistory()
-    const { isAuthenticated, initiateAuthClearance, MasterDispatch } = useContext(MasterContext)
+    const { isAuthenticated, initiateAuthClearance, MasterDispatch, selectedItem } = useContext(MasterContext)
     const { getItem } = utilFunctions
 
 /** --- initialLoad/reLoad, checking for earlier logins--------------------------------- */
@@ -22,6 +22,13 @@ useEffect(() => {
         }
     }, [initiateAuthClearance])
 /**------------------------------------------------------------------------------------- */
+/**------------- TESTING --------------------------------------------------------------- */
+useEffect(() => {
+    console.log('si', selectedItem)
+}, [selectedItem])
+/**------------------------------------------------------------------------------------- */
+
+
 
     return(<></>)//Render nothing!
 }

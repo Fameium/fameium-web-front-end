@@ -73,21 +73,21 @@ const Productivity = () => {
                             <div className="header__title">Projects</div>
                             <div className="header__button" onClick={() => history.push('/productivity/project/new')}>New Project</div>
                         </div>
-                        <div className="list"><ProductivityList data={projects} /></div>
+                        <div className="list"><ProductivityList data={projects} type='project' /></div>
                     </div>
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Ideas</div>
                             <div className="header__button">New Idea</div>
                         </div>
-                        <div className="list"><ProductivityList data={ideas} /></div>
+                        <div className="list"><ProductivityList data={ideas} type='idea' /></div>
                     </div>
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Sponsorships</div>
                             <div className="header__button">New Sponsorship</div>
                         </div>
-                        <div className="list"><ProductivityList data={sponsorships} /></div>
+                        <div className="list"><ProductivityList data={sponsorships} type='sponsorship' /></div>
 
                     </div>
                 </div>

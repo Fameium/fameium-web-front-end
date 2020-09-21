@@ -8,8 +8,8 @@ const initialState = {
     tokenHeader: null,
     profile: null,
     activeTenant: null,
-    productivityData: null
-
+    productivityData: null,
+    selectedItem: {}
 }
 
 export const MasterContext = createContext(initialState)
@@ -30,6 +30,8 @@ const MasterContextReducer = (state, action) => {
             return { ...state, activeTenant: action.value }
         case 'SET_PRODUCTIVITY_DATA':
             return { ...state, productivityData: action.value }
+        case 'SET_SELECTED_ITEM':
+            return { ...state, selectedItem: action.value }
         default:
             return state
 

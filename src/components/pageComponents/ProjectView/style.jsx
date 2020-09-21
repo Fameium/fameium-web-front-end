@@ -2,15 +2,21 @@ import {makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     mainWrapper: {
-        marginTop: '50px'
+        marginTop: '70px',
+        width: '100%'
     },
     mainTitle: {
-        marginLeft: '0px'
+        marginLeft: '10px'
     },
+
+        // backgroundColor: 'red',
+        // color: 'white'
+        
+    
     titleContainer: {
         // backgroundColor: 'red',
-        padding: '20px 10px',
-        marginBottom: '10px'
+        padding: '20px 40px',
+        marginBottom: '20px'
         
     },
     lastEdited: {
@@ -18,7 +24,10 @@ const useStyles = makeStyles((theme) => ({
     },
     column1: {
         // backgroundColor: 'blue',
-        padding: '20px 10px',
+        padding: '20px 40px',
+        [theme.breakpoints.down('sm')]: {
+            padding: '20px 10px'
+        }
 
     },
     column2: {
@@ -36,6 +45,13 @@ const useStyles = makeStyles((theme) => ({
     },
     datePaper: {
         width: '100%'
+    },
+    secondButton: {
+        marginLeft: '15px'
+    },
+    heading: {
+        marginBottom: '10px',
+        marginTop: '15px'
     }
 
 }))

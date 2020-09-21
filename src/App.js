@@ -23,7 +23,7 @@ const App = () => {
             <Route exact path='/sign-in' component={SignIn} />
             <Route exact path='/productivity' component={Productivity} />
             <Route exact path='/productivity/project/:id/edit' component={ProjectForm} />
-            <Route exact path='/productivity/project/view/:id' component={ProjectView} />
+            <Route exact path='/productivity/project/:id/view' component={ProjectView} />
             <Route exact path='/productivity/project/new' component={ProjectForm} />
             <Route exact path='/test' component={Test} />
             <Route render={() => <Redirect to={{ pathname: "/" }} />} />
