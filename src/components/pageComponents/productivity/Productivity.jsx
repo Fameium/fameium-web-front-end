@@ -93,8 +93,8 @@ const Productivity = () => {
                 </div>
                 <div className="productivity-list-wrapper-mobile">
                    
-                    <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} /></div>
-                    <div className="add-button" onClick={() => history.push('/productivity/new-project')}><AddButtonIcon color='red' /></div>
+                    <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} type='project' /></div>
+                    <div className="add-button" onClick={() => history.push('/productivity/project/new')}><AddButtonIcon color='red' /></div>
                 </div>
             </div>
             <ProductivityFooter activeTab={activeTab} onClickFunction={onFooterClick} />

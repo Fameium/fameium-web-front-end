@@ -9,6 +9,11 @@ import { MasterContext } from '../../../context/MasterContext'
 import api from './../../../APIs/api'
 import utilFunctions from '../../../utilityFunctions/localStorage'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 
@@ -30,6 +35,7 @@ const ProjectView = () => {
     const [sponsorships, setSponsorships] = useState([])
     const [status, setStatus] = useState(0)
     const [script, setScript] = useState('')
+    const [showPopup, setShowPopup] = useState(false)
     /**-------------------------------------------------- */
 
     // if(!id) setId(arr[-2])
@@ -61,6 +67,16 @@ const ProjectView = () => {
             })
     }, [id])
 
+    const [statusValue, setStatusValue] = useState('')
+    useEffect(() => {
+        if (status === 0) setStatusValue('To-do')
+        else if (status === 1) setStatusValue('Planning')
+        else if (status === 2) setStatusValue('Scripting')
+        else if (status === 3) setStatusValue('Production')
+        else if (status === 4) setStatusValue('Editing')
+        else if (status === 5) setStatusValue('Completed')
+        else if (status === 6) setStatusValue('Published')
+    }, [status])
 
     function onEditClick() {
         MasterDispatch({ type: 'SET_SELECTED_ITEM', value: profile })
@@ -68,7 +84,7 @@ const ProjectView = () => {
     }
 
     function onDeleteClick() {
-
+        setShowPopup(false)
     }
 
 
@@ -80,8 +96,7 @@ const ProjectView = () => {
         <Grid container className={c.mainWrapper} variant="outlined">
             {/* ------------------ header =-------------------------------- */}
             <Grid item container sm={12} alignItems='center' className={c.titleContainer}>
-                <ArrowRightIcon /> <Typography variant='h6' className={c.mainTitle}>{name}</Typography>
-                <Typography variant='caption' className={c.lastEdited}>LAST EDITED</Typography>
+                <Typography variant='h6' className={c.mainTitle}>{name}</Typography>
             </Grid>
             {/* ------------------------- header end-------------------------- */}
 
@@ -89,7 +104,7 @@ const ProjectView = () => {
             <Grid item container xs={12} sm={6} className={c.column1}>
                 <Grid item xs={12}>
                     <Paper className={`${c.paper} ${c.status}`} elevation={1} color='secondary'>
-                        <Typography variant='caption' style={{ width: '100%' }}  ><b>STATUS :</b></Typography>
+                        <Typography variant='caption' style={{ width: '100%' }}  ><b>STATUS :</b>{statusValue}</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
@@ -131,11 +146,11 @@ const ProjectView = () => {
                     </Grid>
                 </Grid>
                 {/* c1 r5 buttons */}
-                <Hidden smDown>
+                <Hidden xsDown> {/** for desktop */}
 
                     <Grid item container sm={12} className={`${c.paper} ${c.desktopOnly}`}>
                         <Grid item > <Button variant="contained" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={onEditClick}>Edit</Button> </Grid>
-                        <Grid item className={c.secondButton} > <Button variant="outlined" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />}  onClick={onDeleteClick} >Delete</Button> </Grid>
+                        <Grid item className={c.secondButton} > <Button variant="outlined" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={() => setShowPopup(true)} >Delete</Button> </Grid>
 
                     </Grid>
                 </Hidden>
@@ -153,10 +168,10 @@ const ProjectView = () => {
                     </Paper>
 
                 </Grid>
-                <Hidden smUp>
+                <Hidden smUp> {/** for mobile */}
                     <Grid item container sm={12} className={`${c.paper} ${c.mobileOnly}`}>
                         <Grid item > <Button variant="contained" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={onEditClick} >Edit</Button> </Grid>
-                        <Grid item className={c.secondButton} > <Button variant="outlined" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={onDeleteClick} >Delete</Button> </Grid>
+                        <Grid item className={c.secondButton} > <Button variant="outlined" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={() => setShowPopup(true)} >Delete</Button> </Grid>
 
                     </Grid>
                 </Hidden>
@@ -164,6 +179,30 @@ const ProjectView = () => {
             </Grid>
             {/* -------------col 2 --------------------------------------------- */}
         </Grid >
+        {/* Delete Confirm Popup start */}
+        <Dialog
+            open={showPopup}
+            onClose={() => setShowPopup(false)}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+            <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    Deleting the asset will remove all the datas including the script and sponsorship datas.
+                    This is an irreversible process. Are you sure to continue?
+          </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={() => setShowPopup(false)} color="primary">
+                    No
+          </Button>
+                <Button onClick={onDeleteClick} color="primary" autoFocus>
+                    Yes
+          </Button>
+            </DialogActions>
+        </Dialog>
+        {/* Delete Confirm Popup end */}
     </>
     )
 }

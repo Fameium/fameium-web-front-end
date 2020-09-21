@@ -16,7 +16,11 @@ const useStyles = makeStyles((theme) => ({
     titleContainer: {
         // backgroundColor: 'red',
         padding: '20px 40px',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        [theme.breakpoints.down('sm')]: {
+            padding: '20px 10px 0px',
+            marginBottom: '10px'
+        }
         
     },
     lastEdited: {
