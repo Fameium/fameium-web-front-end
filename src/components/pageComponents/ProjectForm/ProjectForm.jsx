@@ -1,24 +1,24 @@
 import React, { useState, useContext, useEffect } from 'react'
 import ProjectFormStyledComponent from './Style'
 import AppHeader from '../../commonComponents/appheader/AppHeader'
-import theme from '../../../data/theme.json'
+// import theme from '../../../data/theme.json'
 import { Grid, Typography, makeStyles, useTheme, TextField, Button, Input, Hidden } from '@material-ui/core'
 // import SaveIcon from '@material-ui/icons/Save'
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+// import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ReactQuill from 'react-quill'; // ES6
 import 'react-quill/dist/quill.snow.css'; // ES6
 import { useHistory } from 'react-router-dom'
 import utilFunctions from '../../../utilityFunctions/localStorage'
 import api from './../../../APIs/api'
 import { MasterContext } from '../../../context/MasterContext'
-import AssistantIcon from '@material-ui/icons/Assistant';
+// import AssistantIcon from '@material-ui/icons/Assistant';
 import SaveIcon from '@material-ui/icons/Save';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
+// import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 
 
@@ -136,6 +136,7 @@ const ProjectForm = () => {
                 if (script === '') setScript(selectedItem.script)
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedItem])
 
 

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import AppHeader from '../../commonComponents/appheader/AppHeader'
 
 import { Grid, Typography, Paper, Button, Hidden } from '@material-ui/core'
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+// import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import useStyles from './style.jsx'
 import { MasterContext } from '../../../context/MasterContext'
 import api from './../../../APIs/api'
@@ -19,7 +19,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 const ProjectView = () => {
 
     const c = useStyles();
-    const { selectedItem, MasterDispatch } = useContext(MasterContext)
+    const { MasterDispatch } = useContext(MasterContext)
     const { get } = api();
     const history = useHistory()
     const { getItem } = utilFunctions;
@@ -30,9 +30,9 @@ const ProjectView = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [notes, setNotes] = useState('')
-    const [startDate, setStartDate] = useState('')
-    const [endDate, setEndDate] = useState('')
-    const [sponsorships, setSponsorships] = useState([])
+    const [, setStartDate] = useState('')
+    const [, setEndDate] = useState('')
+    const [, setSponsorships] = useState([])
     const [status, setStatus] = useState(0)
     const [script, setScript] = useState('')
     const [showPopup, setShowPopup] = useState(false)
@@ -65,6 +65,7 @@ const ProjectView = () => {
             .catch((err) => {
                 console.log('response', err)
             })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const [statusValue, setStatusValue] = useState('')

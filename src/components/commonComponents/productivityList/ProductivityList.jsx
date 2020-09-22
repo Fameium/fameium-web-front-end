@@ -38,7 +38,6 @@ const ProductivityList = ({ data, type = null }) => {
             <div className="productivitylist">
                 {/* {console.log('list', data)} */}
                 {data && data.map(e => {
-                    {console.log('listx', e)}
                     return <div className="list__item" id={e.id} onClick={() => clickOnItem(e)}>
                         <div className="item__title">{e.name}</div>
                     </div>
