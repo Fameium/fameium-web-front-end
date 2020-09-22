@@ -16,7 +16,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
-
 const ProjectView = () => {
 
     const c = useStyles();
@@ -24,9 +23,10 @@ const ProjectView = () => {
     const { get } = api();
     const history = useHistory()
     const { getItem } = utilFunctions;
+    const { del } = api();
     /**-------------------------------------------------- */
     const [profile, setProfile] = useState(null)
-    const [id, setId] = useState(null)
+    const [id, setId] = useState(history.location.pathname.split('/')[3])
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [notes, setNotes] = useState('')
@@ -40,10 +40,10 @@ const ProjectView = () => {
 
     // if(!id) setId(arr[-2])
 
-    useEffect(() => {
-        const tempId = history.location.pathname.split('/')[3]
-        if (!id) setId(tempId)
-    }, [])
+    // useEffect(() => {
+    //     const tempId = 
+    //     if (!id) setId(tempId)
+    // }, [])
 
     useEffect(() => {
 
@@ -65,7 +65,7 @@ const ProjectView = () => {
             .catch((err) => {
                 console.log('response', err)
             })
-    }, [id])
+    }, [])
 
     const [statusValue, setStatusValue] = useState('')
     useEffect(() => {
@@ -85,6 +85,18 @@ const ProjectView = () => {
 
     function onDeleteClick() {
         setShowPopup(false)
+        const params = { tenant_id: getItem('auth-data').user.tenants[0].id }
+        const header = { Authorization: `token ${getItem('auth-data').token}` }
+        del(`projects/${id}`, params, header, {})
+        .then((res) => {
+            history.push(`/productivity`)
+            console.log('response', res)
+
+        })
+        .catch((err) => {
+            console.log('response', err)
+        })
+
     }
 
 
@@ -96,7 +108,7 @@ const ProjectView = () => {
         <Grid container className={c.mainWrapper} variant="outlined">
             {/* ------------------ header =-------------------------------- */}
             <Grid item container sm={12} alignItems='center' className={c.titleContainer}>
-                <Typography variant='h6' className={c.mainTitle}>{name}</Typography>
+                <Typography variant='h4' color='secondary' className={c.mainTitle}>{name}</Typography>
             </Grid>
             {/* ------------------------- header end-------------------------- */}
 
@@ -104,11 +116,11 @@ const ProjectView = () => {
             <Grid item container xs={12} sm={6} className={c.column1}>
                 <Grid item xs={12}>
                     <Paper className={`${c.paper} ${c.status}`} elevation={1} color='secondary'>
-                        <Typography variant='caption' style={{ width: '100%' }}  ><b>STATUS :</b>{statusValue}</Typography>
+                        <Typography style={{ width: '100%' }}  ><b>STATUS : </b>{statusValue}</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant='h6' className={c.heading} >DESCRIPTION</Typography>
+                    <Typography variant='h5' className={c.heading} >DESCRIPTION</Typography>
 
                     <Paper className={c.paper} elevation={1}>
                         <Typography>{description}</Typography>
@@ -116,7 +128,7 @@ const ProjectView = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Typography variant='h6' className={c.heading}>NOTES</Typography>
+                    <Typography variant='h5' className={c.heading}>NOTES</Typography>
 
                     <Paper className={c.paper} elevation={2}>
                         <Typography>{notes}</Typography>
@@ -126,23 +138,23 @@ const ProjectView = () => {
                 {/* col-1 row-3 dates */}
                 <Grid item container sm={12} className={c.paper}>
                     <Grid item container direction='column' xs={6}>
-                        <Typography variant='h6'>Start Date</Typography>
+                        <Typography variant='h5'>Start Date</Typography>
                         {/* <Typography variant='caption'>{startDate}</Typography> */}
                         <Typography variant='caption'>21- 05-2020</Typography>
                     </Grid>
                     <Grid item container direction='column' className={c.endDate} xs={6} >
-                        <Typography variant='h6'>End Date</Typography>
+                        <Typography variant='h5'>End Date</Typography>
                         {/* <Typography variant='caption'>{endDate}</Typography> */}
                         <Typography variant='caption'>04-07-2020</Typography>
                     </Grid>
                 </Grid>
                 {/* c1 r4 sponsors */}
-                <Typography variant='h6' className={c.heading}>Sponsorships</Typography>
+                <Typography variant='h5' className={c.heading}>Sponsorships</Typography>
                 <Grid item container sm={12}>
                     <Grid item container direction='column'>
-                        <Paper className={c.paper} elevation={2}> <Typography variant='caption'>Sponsorships</Typography> </Paper>
-                        <Paper className={c.paper} elevation={2}> <Typography variant='caption'>Sponsorships</Typography> </Paper>
-                        <Paper className={c.paper} elevation={2}> <Typography variant='caption'>Sponsorships</Typography> </Paper>
+                        <Paper className={c.paper} elevation={2}> <Typography >Sponsorships</Typography> </Paper>
+                        <Paper className={c.paper} elevation={2}> <Typography >Sponsorships</Typography> </Paper>
+                        <Paper className={c.paper} elevation={2}> <Typography >Sponsorships</Typography> </Paper>
                     </Grid>
                 </Grid>
                 {/* c1 r5 buttons */}
@@ -160,11 +172,11 @@ const ProjectView = () => {
 
             {/* // -----col 2 ----------------------------------------------- */}
             <Grid item container xs={12} sm={6} className={c.column2} justify='flex-start' alignContent='flex-start'>
-                <Typography variant='h6' className={c.heading}>SCRIPT</Typography>
+                <Typography variant='h5' className={c.heading}>SCRIPT</Typography>
 
                 <Grid item container xs={12}>
-                    <Paper className={c.paper} elevation={2} >
-                        <Typography variant='caption' className={c.endDate}>{script}</Typography>
+                    <Paper className={c.paper} elevation={2} style={{width: '100%'}} >
+                        <Typography variant='caption' className={c.endDate}><div dangerouslySetInnerHTML={{__html: script}} />  </Typography>
                     </Paper>
 
                 </Grid>

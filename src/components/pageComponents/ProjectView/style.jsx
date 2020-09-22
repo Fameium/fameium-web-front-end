@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
     column2: {
         // backgroundColor: 'pink',
-        padding: '20px 10px',
+        padding: '0px 10px 20px',
 
     },
     endDate: {

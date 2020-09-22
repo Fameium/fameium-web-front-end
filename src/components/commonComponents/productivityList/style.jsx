@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const ProductivityListStyled = styled.div`
     .productivitylist{
         width: 100%;
+        padding-bottom: '100px';
 
         .list__item{
             height: 35px;

@@ -27,7 +27,8 @@ import Select from '@material-ui/core/Select';
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
         marginTop: '70px',
-        width: '100%'
+        width: '100%',
+        padding: '0px 0px 130px'
         // backgroundColor: 'yellow'
     },
     titleContainer: {
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
     column2: {
         padding: '20px 10px',
+        
 
     },
     TextField: {
@@ -145,13 +147,14 @@ const ProjectForm = () => {
             "name": name,
             "description": description,
             "motes": notes, //SM
-            "start_date": startDate,
-            "end_date": endDate,
+            // "start_date": startDate,
+            // "end_date": endDate,
             "script": script
             //sponsorships - Not handled yet.
         }
         post('projects', params, header, body)
             .then((res) => {
+                history.push('/productivity')
                 console.log('response', res)
             })
             .catch((err) => {
@@ -161,20 +164,23 @@ const ProjectForm = () => {
 
     }
 
+    
     function saveEditProject() {
         const params = { tenant_id: getItem('auth-data').user.tenants[0].id }
         const header = { Authorization: `token ${getItem('auth-data').token}` }
         const body = {
-            "name": name,
-            "description": description,
-            "motes": notes, //SM
-            "start_date": startDate,
-            "end_date": endDate,
-            "script": script
+            "name": name
+            // "description": description,
+            // "motes": notes, //SM
+            // "start_date": startDate,
+            // "end_date": endDate,
+            // "script": script
             //sponsorships - Not handled yet.
+            // "script": script
         }
         patch(`projects/${id}`, params, header, body)
             .then((res) => {
+                history.push('/productivity')
                 console.log('response', res)
             })
             .catch((err) => {
@@ -212,7 +218,7 @@ const ProjectForm = () => {
             <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
             <Grid container className={classes.mainContainer} justify='flex-start' >
                 <Grid item container className={classes.titleContainer} alignItems='flex-end'  >
-                    <Grid item xs={12} sm={6} > <Typography variant="h5"  > Add New Project</Typography> </Grid>
+                    <Grid item xs={12} sm={6} > <Typography variant="h4" color='secondary'  > Add New Project</Typography> </Grid>
                     {/* <Grid item xs={12} sm={6} > <Typography variant="caption"> LastdkjfhEdited: 3746286238</Typography> </Grid> */}
                 </Grid>
 
@@ -306,7 +312,7 @@ const ProjectForm = () => {
                 {/* --c2 */}
                 <Grid item container xs={12} sm={6}  className={classes.column2} alignContent='flex-start' >
                     <Grid item container padding={2} alignItems='center' style={{ marginBottom: '10px' }}>
-                        <Grid item xs={2} > <Typography  >Script</Typography> </Grid>
+                        <Grid item xs={2} > <Typography variant='h5' >Script</Typography> </Grid>
                         <Grid item container xs={10} justify='flex-end' >
                             <Grid item > <Button variant="contained" color="secondary" size="small" fullWidth startIcon={<CloudDownloadIcon />} >Import</Button> </Grid>
                             <Grid item style={{ marginLeft: '10px' }} > <Button variant="outlined" color="secondary" size="small" fullWidth startIcon={<CloudUploadIcon />} >Export</Button> </Grid>

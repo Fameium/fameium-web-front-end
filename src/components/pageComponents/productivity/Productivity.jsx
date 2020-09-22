@@ -38,7 +38,7 @@ const Productivity = () => {
         
 
 
-    }, [projects, ideas, sponsorships])
+    }, [])
     
     
 
