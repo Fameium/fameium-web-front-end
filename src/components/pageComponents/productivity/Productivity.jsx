@@ -5,122 +5,54 @@ import ProductivityFooter from '../../commonComponents/ProductivityFooter/Produc
 import ProductivityList from '../../commonComponents/productivityList/ProductivityList'
 import theme from '../../../data/theme.json'
 import AddButtonIcon from '../../../assets/AddButtonIcon'
+import { useHistory } from 'react-router-dom';
+import api from './../../../APIs/api'
+import utilFunctions from '../../../utilityFunctions/localStorage'
 
 const Productivity = () => {
 
     const [activeTab, setActiveTab] = useState('projects')
     const [dataForMobileView, setDataForMobileView] = useState(null)
-    const [mobileViewTitle, setMobileViewTitle] = useState(null)
+    const [projects, setProjects] = useState(null)
+    const [ideas, setIdeas] = useState(null)
+    const [sponsorships, setSponsorships] = useState(null)
+    const history = useHistory()
+    const { get } = api()
+    // const { MasterDispatch, tokenHeader, activeTenant, productivityData } = useContext(MasterContext)
+    const { getItem } = utilFunctions
 
-    const projectData = {
-        "projects": [
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
+    // let projectData = {}
+    let params = { tenant_id: getItem('auth-data').user.tenants[0].id }
+    const header = { Authorization: `token ${getItem('auth-data').token}` }
+    useEffect(() => {
 
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
+        if(!projects || !ideas || !sponsorships) get('productivity', params, header, {} ).then((res) => {
+            console.log('RES', res )
+            setProjects(res.data.projects)
+            setDataForMobileView(res.data.projects)
+            setIdeas(res.data.ideas)
+            setSponsorships(res.data.sponserships) //SM
+        }).catch((error) => {
+            console.log('Error in fetching productivity data.', error)
+        })
+        
 
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
 
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            },
-            {
-                "id": "jhfgdjshua",
-                "title": "title one title one title one title one title one",
-
-            }
-
-        ]
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    
+    
 
     useEffect(() => { //This is applicable only in mobile view
         if (activeTab === 'projects') {
-            setDataForMobileView(projectData.projects)
-            setMobileViewTitle('Projects')
+            setDataForMobileView(projects)
         }
         if (activeTab === 'ideas') {
-            setDataForMobileView(projectData.projects)
-            setMobileViewTitle('Ideas')
+            setDataForMobileView(ideas)
 
         }
         if (activeTab === 'sponsorships') {
-            setDataForMobileView(projectData.projects)
-            setMobileViewTitle('Sponsorships')
+            setDataForMobileView(sponsorships)
 
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -134,37 +66,36 @@ const Productivity = () => {
     return (
         <ProductivityStyledComponent theme={theme}>
             <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
+            {console.log('prod', projects, ideas, sponsorships)}
             <div className="productivity-wrapper">
                 <div className="productivity-list-wrapper-web">
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Projects</div>
-                            <div className="header__button">New Project</div>
+                            <div className="header__button" onClick={() => history.push('/productivity/project/new')}>New Project</div>
                         </div>
-                        <div className="list"><ProductivityList data={projectData.projects} /></div>
+                        <div className="list"><ProductivityList data={projects} type='project' /></div>
                     </div>
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Ideas</div>
                             <div className="header__button">New Idea</div>
                         </div>
-                        <div className="list"><ProductivityList data={projectData.projects} /></div>
+                        <div className="list"><ProductivityList data={ideas} type='idea' /></div>
                     </div>
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Sponsorships</div>
                             <div className="header__button">New Sponsorship</div>
                         </div>
-                        <div className="list"><ProductivityList data={projectData.projects} /></div>
+                        <div className="list"><ProductivityList data={sponsorships} type='sponsorship' /></div>
 
                     </div>
                 </div>
                 <div className="productivity-list-wrapper-mobile">
-                    <div className="productivity__header">
-                        <div className="header__title">{mobileViewTitle}</div>
-                    </div>
-                    <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} /></div>
-                    <div className="add-button"><AddButtonIcon color='red' /></div>
+                   
+                    <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} type='project' /></div>
+                    <div className="add-button" onClick={() => history.push('/productivity/project/new')}><AddButtonIcon color='red' /></div>
                 </div>
             </div>
             <ProductivityFooter activeTab={activeTab} onClickFunction={onFooterClick} />

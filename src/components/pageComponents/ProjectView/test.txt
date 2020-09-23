@@ -1,0 +1,7 @@
+0 -> Todo 
+1 -> planning
+2 -> scripting
+3 -> production
+4 -> editing
+5 -> completed
+6 -> published
