@@ -10,18 +10,18 @@ const ProductivityFooter = ({ activeTab, onClickFunction }) => {
     return (
         <ProductivityFooterStyled>
             <div className="productivity-footer-wrapper">
-                <div className="icon-group" onClick={() => onClickFunction('projects')}>
-                    <ProjectIcon color={ activeTab === 'projects' ? 'red' : 'grey'} />
-                    <div className="icon-title" style={{ color: activeTab === 'projects' ? 'red' : 'grey' }} >Projects</div>
+                <div className="icon-group" onClick={() => onClickFunction('project')}>
+                    <ProjectIcon color={ activeTab === 'project' ? 'red' : 'grey'} />
+                    <div className="icon-title" style={{ color: activeTab === 'project' ? 'red' : 'grey' }} >Projects</div>
                 </div>
-                <div className="icon-group" onClick={() => onClickFunction('ideas')}>
-                    <IdeaIcon color={ activeTab === 'ideas' ? 'red' : 'grey'} />
-                    <div className="icon-title" style={{ color: activeTab === 'ideas' ? 'red' : 'grey' }}  >Ideas</div>
+                <div className="icon-group" onClick={() => onClickFunction('idea')}>
+                    <IdeaIcon color={ activeTab === 'idea' ? 'red' : 'grey'} />
+                    <div className="icon-title" style={{ color: activeTab === 'idea' ? 'red' : 'grey' }}  >Ideas</div>
 
                 </div>
-                <div className="icon-group" onClick={() => onClickFunction('sponsorships')}>
-                    <SponsorshipIcon color={ activeTab === 'sponsorships' ? 'red' : 'grey'} />
-                    <div className="icon-title" style={{ color: activeTab === 'sponsorships' ? 'red' : 'grey' }} >Sponsorships</div>
+                <div className="icon-group" onClick={() => onClickFunction('sponsorship')}>
+                    <SponsorshipIcon color={ activeTab === 'sponsorship' ? 'red' : 'grey'} />
+                    <div className="icon-title" style={{ color: activeTab === 'sponsorship' ? 'red' : 'grey' }} >Sponsorships</div>
 
                 </div>
             </div>

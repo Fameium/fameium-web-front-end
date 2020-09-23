@@ -11,7 +11,7 @@ import utilFunctions from '../../../utilityFunctions/localStorage'
 
 const Productivity = () => {
 
-    const [activeTab, setActiveTab] = useState('projects')
+    const [activeTab, setActiveTab] = useState('project')
     const [dataForMobileView, setDataForMobileView] = useState(null)
     const [projects, setProjects] = useState(null)
     const [ideas, setIdeas] = useState(null)
@@ -44,14 +44,14 @@ const Productivity = () => {
     
 
     useEffect(() => { //This is applicable only in mobile view
-        if (activeTab === 'projects') {
+        if (activeTab === 'project') {
             setDataForMobileView(projects)
         }
-        if (activeTab === 'ideas') {
+        if (activeTab === 'idea') {
             setDataForMobileView(ideas)
 
         }
-        if (activeTab === 'sponsorships') {
+        if (activeTab === 'sponsorship') {
             setDataForMobileView(sponsorships)
 
         }
@@ -61,6 +61,17 @@ const Productivity = () => {
     const onFooterClick = (e) => {
         setActiveTab(e)
     }
+
+    function handleMobileClickOnitem () {
+        if (activeTab === 'project') {
+            history.push('/productivity/project/new')        }
+        if (activeTab === 'idea') {
+            history.push('/productivity/idea/new')
+        }
+        if (activeTab === 'sponsorship') {
+            history.push('/productivity/sponsorship/new')
+        }
+    }  
 
 
     return (
@@ -79,7 +90,7 @@ const Productivity = () => {
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Ideas</div>
-                            <div className="header__button">New Idea</div>
+                            <div className="header__button" onClick={() => history.push('/productivity/idea/new')}>New Idea</div>
                         </div>
                         <div className="list"><ProductivityList data={ideas} type='idea' /></div>
                     </div>
@@ -94,8 +105,8 @@ const Productivity = () => {
                 </div>
                 <div className="productivity-list-wrapper-mobile">
                    
-                    <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} type='project' /></div>
-                    <div className="add-button" onClick={() => history.push('/productivity/project/new')}><AddButtonIcon color='red' /></div>
+                    <div className="productivity__list"><ProductivityList data={dataForMobileView && dataForMobileView} type={activeTab} /></div>
+                    <div className="add-button" onClick={handleMobileClickOnitem}><AddButtonIcon color='red' /></div>
                 </div>
             </div>
             <ProductivityFooter activeTab={activeTab} onClickFunction={onFooterClick} />
