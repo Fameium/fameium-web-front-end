@@ -9,7 +9,8 @@ const initialState = {
     profile: null,
     activeTenant: null,
     productivityData: null,
-    selectedItem: {}
+    selectedItem: {},
+    snackBar: false
 }
 
 export const MasterContext = createContext(initialState)
@@ -32,6 +33,8 @@ const MasterContextReducer = (state, action) => {
             return { ...state, productivityData: action.value }
         case 'SET_SELECTED_ITEM':
             return { ...state, selectedItem: action.value }
+        case 'SET_SNACK_BAR':
+            return { ...state, snackBar: action.value }
         default:
             return state
 
