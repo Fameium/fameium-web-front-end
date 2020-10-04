@@ -38,7 +38,7 @@ const ProjectView = () => {
     const [noOfVideos, setNoOfVideos] = useState(0)
     const [totalAmount, setTotalAmount] = useState(0)
     const [agreement, setAgreement] = useState('')
-    const [sponsorshipType, setSponsorshipType] = useState(0)
+    const [, setSponsorshipType] = useState(0)
     /**-------------------------------------------------- */
 
     // if(!id) setId(arr[-2])
