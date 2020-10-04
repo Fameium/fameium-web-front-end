@@ -61,7 +61,7 @@ const ProjectView = () => {
                 setId(res.data.id)
                 setName(res.data.name)
                 setDescription(res.data.description)
-                setNotes(res.data.motes)
+                setNotes(res.data.notes)
             })
             .catch((err) => {
                 console.log('response', err)
@@ -85,13 +85,13 @@ const ProjectView = () => {
                 setSnackbarMessage('Idea Deleted Succesfully')
                 setShowSnackbar(true)
                 history.push(`/productivity`)
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'success', message: 'idea deleted' }})
                 console.log('response', res)
 
             })
             .catch((err) => {
                 setContentLoaded(true)
-                setSnackbarMessage('Oops! error while deleting')
-                setShowSnackbar(true)
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'error', message: 'Error while deleting idea' }})
                 console.log('response', err)
             })
 

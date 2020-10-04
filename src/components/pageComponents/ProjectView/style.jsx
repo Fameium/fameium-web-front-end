@@ -56,6 +56,12 @@ const useStyles = makeStyles((theme) => ({
     heading: {
         marginBottom: '10px',
         marginTop: '15px'
+    },
+    skeleton: {
+        height: 'calc(100vh/2)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 
 }))

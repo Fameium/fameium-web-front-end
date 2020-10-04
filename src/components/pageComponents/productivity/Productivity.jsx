@@ -31,7 +31,7 @@ const Productivity = () => {
             setProjects(res.data.projects)
             setDataForMobileView(res.data.projects)
             setIdeas(res.data.ideas)
-            setSponsorships(res.data.sponserships) //SM
+            setSponsorships(res.data.sponsorships) //SM
         }).catch((error) => {
             console.log('Error in fetching productivity data.', error)
         })
@@ -97,7 +97,7 @@ const Productivity = () => {
                     <div className="productivity__list">
                         <div className="list__header">
                             <div className="header__title">Sponsorships</div>
-                            <div className="header__button">New Sponsorship</div>
+                            <div className="header__button" onClick={() => history.push('/productivity/sponsorship/new')} >New Sponsorship</div>
                         </div>
                         <div className="list"><ProductivityList data={sponsorships} type='sponsorship' /></div>
 

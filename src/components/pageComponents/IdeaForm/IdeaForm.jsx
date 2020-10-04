@@ -34,7 +34,7 @@ const IdeaForm = () => {
     const history = useHistory();
     const { getItem } = utilFunctions;
     const { post, patch } = api();
-    const { selectedItem } = useContext(MasterContext)
+    const { selectedItem, MasterDispatch  } = useContext(MasterContext)
     /**--------------------------------------------------- */
     const [mode, setMode] = useState('N')//Mode of Component - NEW/EDIT project
     /**--------------------------------------------------- */
@@ -51,10 +51,10 @@ const IdeaForm = () => {
             // setId(arr(-2))
             if (mode !== 'E') setMode('E') // For mode as 'NEW' Project
             if (selectedItem) {
-                if (id === '') setId(selectedItem.id)
-                if (name === '') setName(selectedItem.name)
-                if (description === '') setDescription(selectedItem.description)
-                if (notes === '') setDescription(selectedItem.motes) //SM
+                setId(selectedItem.id)
+                setName(selectedItem.name)
+                setDescription(selectedItem.description)
+               setNotes(selectedItem.notes) //SM
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,14 +68,16 @@ const IdeaForm = () => {
         const body = {
             "name": name,
             "description": description,
-            "motes": notes, //SM
+            "notes": notes, 
         }
         post('ideas', params, header, body)
             .then((res) => {
                 history.push('/productivity')
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'success', message: 'New idea added' }})
                 console.log('response', res)
             })
             .catch((err) => {
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'error', message: 'Error while adding Idea' }})
                 console.log('response', err)
             })
 
@@ -87,14 +89,18 @@ const IdeaForm = () => {
         const params = { tenant_id: getItem('auth-data').user.tenants[0].id }
         const header = { Authorization: `token ${getItem('auth-data').token}` }
         const body = {
-            "name": name
+            "name": name,
+            "notes": notes,
+            "description": description
         }
         patch(`ideas/${id}`, params, header, body)
             .then((res) => {
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'success', message: 'Succesfully updated idea. ' }})
                 history.push('/productivity')
                 console.log('response', res)
             })
             .catch((err) => {
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'error', message: 'Error while updating idea' }})
                 console.log('response', err)
             })
 
@@ -108,7 +114,7 @@ const IdeaForm = () => {
                 <Grid item xs={12} className={classes.inputMargin} ><TextField label="Idea name" color="secondary" fullWidth value={name} onChange={(e) => setName(e.target.value)} /></Grid>
                 <Grid item xs={12} className={classes.inputMargin} ><TextField label="Description" color="secondary" fullWidth value={description} onChange={(e) => setDescription(e.target.value)} /></Grid>
                 <Grid item xs={12} className={classes.inputMargin} ><TextField label="Notes" color="secondary" fullWidth value={notes} onChange={(e) => setNotes(e.target.value)} /></Grid>
-                <Grid item xs={6} className={classes.inputMargin} >
+                <Grid item xs={5} className={classes.inputMargin} >
     <Button variant="contained" color="secondary" size="large" varient='filled' fullWidth startIcon={<SaveIcon />} onClick={mode === 'N' ? addIdea : saveEditIdea} >{mode === 'N' ? 'SAVE' : 'UPDATE'}</Button>
                 </Grid>
 

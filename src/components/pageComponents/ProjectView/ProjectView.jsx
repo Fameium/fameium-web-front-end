@@ -14,6 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const ProjectView = () => {
@@ -30,13 +31,15 @@ const ProjectView = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [notes, setNotes] = useState('')
-    const [, setStartDate] = useState('')
-    const [, setEndDate] = useState('')
-    const [, setSponsorships] = useState([])
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+    const [sponsorships, setSponsorships] = useState([])
     const [status, setStatus] = useState(0)
     const [script, setScript] = useState('')
     const [showPopup, setShowPopup] = useState(false)
     /**-------------------------------------------------- */
+    const [contentLoaded, setContentLoaded] = useState(false)
+
 
     // if(!id) setId(arr[-2])
 
@@ -55,17 +58,18 @@ const ProjectView = () => {
                 setId(res.data.id)
                 setName(res.data.name)
                 setDescription(res.data.description)
-                setNotes(res.data.motes)
+                setNotes(res.data.notes)
                 setStartDate(res.data.startDate)
                 setEndDate(res.data.endDate)
                 setSponsorships(res.data.sponsorships)
                 setStatus(res.data.status)
                 setScript(res.data.script)
+                setContentLoaded(true)
             })
             .catch((err) => {
                 console.log('response', err)
             })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const [statusValue, setStatusValue] = useState('')
@@ -89,14 +93,16 @@ const ProjectView = () => {
         const params = { tenant_id: getItem('auth-data').user.tenants[0].id }
         const header = { Authorization: `token ${getItem('auth-data').token}` }
         del(`projects/${id}`, params, header, {})
-        .then((res) => {
-            history.push(`/productivity`)
-            console.log('response', res)
+            .then((res) => {
+                history.push(`/productivity`)
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'success', message: 'Project deleted!' }})
+                console.log('response', res)
 
-        })
-        .catch((err) => {
-            console.log('response', err)
-        })
+            })
+            .catch((err) => {
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'error', message: 'Error while deleting project.' }})
+                console.log('response', err)
+            })
 
     }
 
@@ -107,90 +113,91 @@ const ProjectView = () => {
     return (<>
         <AppHeader activeTab='productivity' />
         <Grid container className={c.mainWrapper} variant="outlined">
-            {/* ------------------ header =-------------------------------- */}
-            <Grid item container sm={12} alignItems='center' className={c.titleContainer}>
-                <Typography variant='h4' color='secondary' className={c.mainTitle}>{name}</Typography>
-            </Grid>
-            {/* ------------------------- header end-------------------------- */}
-
-            {/* -------------col 1--------------------------------- */}
-            <Grid item container xs={12} sm={6} className={c.column1}>
-                <Grid item xs={12}>
-                    <Paper className={`${c.paper} ${c.status}`} elevation={1} color='secondary'>
-                        <Typography style={{ width: '100%' }}  ><b>STATUS : </b>{statusValue}</Typography>
-                    </Paper>
+            {contentLoaded && <>
+                {/* ------------------ header =-------------------------------- */}
+                <Grid item container sm={12} alignItems='center' className={c.titleContainer}>
+                    <Typography variant='h4' color='secondary' className={c.mainTitle}>{name}</Typography>
                 </Grid>
-                <Grid item xs={12}>
-                    <Typography variant='h5' className={c.heading} >DESCRIPTION</Typography>
+                {/* ------------------------- header end-------------------------- */}
 
-                    <Paper className={c.paper} elevation={1}>
-                        <Typography>{description}</Typography>
-                    </Paper>
-                </Grid>
-
-                <Grid item xs={12}>
-                    <Typography variant='h5' className={c.heading}>NOTES</Typography>
-
-                    <Paper className={c.paper} elevation={2}>
-                        <Typography>{notes}</Typography>
-                    </Paper>
-                </Grid>
-
-                {/* col-1 row-3 dates */}
-                <Grid item container sm={12} className={c.paper}>
-                    <Grid item container direction='column' xs={6}>
-                        <Typography variant='h5'>Start Date</Typography>
-                        {/* <Typography variant='caption'>{startDate}</Typography> */}
-                        <Typography variant='caption'>21- 05-2020</Typography>
+                {/* -------------col 1--------------------------------- */}
+                <Grid item container xs={12} sm={6} className={c.column1}>
+                    <Grid item xs={12}>
+                        <Paper className={`${c.paper} ${c.status}`} elevation={1} color='secondary'>
+                            <Typography style={{ width: '100%' }}  ><b>STATUS : </b>{statusValue}</Typography>
+                        </Paper>
                     </Grid>
-                    <Grid item container direction='column' className={c.endDate} xs={6} >
-                        <Typography variant='h5'>End Date</Typography>
-                        {/* <Typography variant='caption'>{endDate}</Typography> */}
-                        <Typography variant='caption'>04-07-2020</Typography>
+                    <Grid item xs={12}>
+                        <Typography variant='h5' className={c.heading} >DESCRIPTION</Typography>
+
+                        <Paper className={c.paper} elevation={1}>
+                            <Typography>{description}</Typography>
+                        </Paper>
                     </Grid>
-                </Grid>
-                {/* c1 r4 sponsors */}
-                <Typography variant='h5' className={c.heading}>Sponsorships</Typography>
-                <Grid item container sm={12}>
-                    <Grid item container direction='column'>
-                        <Paper className={c.paper} elevation={2}> <Typography >Sponsorships</Typography> </Paper>
-                        <Paper className={c.paper} elevation={2}> <Typography >Sponsorships</Typography> </Paper>
-                        <Paper className={c.paper} elevation={2}> <Typography >Sponsorships</Typography> </Paper>
+
+                    <Grid item xs={12}>
+                        <Typography variant='h5' className={c.heading}>NOTES</Typography>
+
+                        <Paper className={c.paper} elevation={2}>
+                            <Typography>{notes}</Typography>
+                        </Paper>
                     </Grid>
-                </Grid>
-                {/* c1 r5 buttons */}
-                <Hidden xsDown> {/** for desktop */}
 
-                    <Grid item container sm={12} className={`${c.paper} ${c.desktopOnly}`}>
-                        <Grid item > <Button variant="contained" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={onEditClick}>Edit</Button> </Grid>
-                        <Grid item className={c.secondButton} > <Button variant="outlined" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={() => setShowPopup(true)} >Delete</Button> </Grid>
-
+                    {/* col-1 row-3 dates */}
+                    <Grid item container sm={12} className={c.paper}>
+                        <Grid item container direction='column' xs={6}>
+                            <Typography variant='h5'>Start Date</Typography>
+                            {/* <Typography variant='caption'>{startDate}</Typography> */}
+                            <Typography variant='caption'>{startDate}</Typography>
+                        </Grid>
+                        <Grid item container direction='column' className={c.endDate} xs={6} >
+                            <Typography variant='h5'>End Date</Typography>
+                            {/* <Typography variant='caption'>{endDate}</Typography> */}
+                            <Typography variant='caption'>{endDate}</Typography>
+                        </Grid>
                     </Grid>
-                </Hidden>
+                    {/* c1 r4 sponsors */}
+                    {sponsorships && sponsorships.length !== 0 &&
+                        <> <Typography variant='h5' className={c.heading}>Sponsorships</Typography>
+                            <Grid item container sm={12}>
+                                <Grid item container direction='column'>
+                                    {sponsorships.map((e) => <Paper className={c.paper} elevation={2}> <Typography >{e.name}</Typography> </Paper>)}
+                                </Grid>
+                            </Grid> </>}
+                    {/* c1 r5 buttons */}
+                    <Hidden xsDown> {/** for desktop */}
 
-            </Grid>
-            {/* ---------- col 1 ------------------------------------------- */}
+                        <Grid item container sm={12} className={`${c.paper} ${c.desktopOnly}`}>
+                            <Grid item > <Button variant="contained" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} onClick={onEditClick}>Edit</Button> </Grid>
+                            <Grid item className={c.secondButton} > <Button variant="outlined" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} onClick={() => setShowPopup(true)} >Delete</Button> </Grid>
 
-            {/* // -----col 2 ----------------------------------------------- */}
-            <Grid item container xs={12} sm={6} className={c.column2} justify='flex-start' alignContent='flex-start'>
-                <Typography variant='h5' className={c.heading}>SCRIPT</Typography>
-
-                <Grid item container xs={12}>
-                    <Paper className={c.paper} elevation={2} style={{width: '100%'}} >
-                        <Typography variant='caption' className={c.endDate}><div dangerouslySetInnerHTML={{__html: script}} />  </Typography>
-                    </Paper>
+                        </Grid>
+                    </Hidden>
 
                 </Grid>
-                <Hidden smUp> {/** for mobile */}
-                    <Grid item container sm={12} className={`${c.paper} ${c.mobileOnly}`}>
-                        <Grid item > <Button variant="contained" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={onEditClick} >Edit</Button> </Grid>
-                        <Grid item className={c.secondButton} > <Button variant="outlined" color="secondary" size="small" fullWidth startIcon={<MonetizationOnIcon />} onClick={() => setShowPopup(true)} >Delete</Button> </Grid>
+                {/* ---------- col 1 ------------------------------------------- */}
+
+                {/* // -----col 2 ----------------------------------------------- */}
+                <Grid item container xs={12} sm={6} className={c.column2} justify='flex-start' alignContent='flex-start'>
+                    <Typography variant='h5' className={c.heading}>SCRIPT</Typography>
+
+                    <Grid item container xs={12}>
+                        <Paper className={c.paper} elevation={2} style={{ width: '100%' }} >
+                            <Typography variant='caption' className={c.endDate}><div dangerouslySetInnerHTML={{ __html: script }} />  </Typography>
+                        </Paper>
 
                     </Grid>
-                </Hidden>
+                    <Hidden smUp> {/** for mobile */}
+                        <Grid item container sm={12} className={`${c.paper} ${c.mobileOnly}`}>
+                            <Grid item > <Button variant="contained" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} onClick={onEditClick} >Edit</Button> </Grid>
+                            <Grid item className={c.secondButton} > <Button variant="outlined" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} onClick={() => setShowPopup(true)} >Delete</Button> </Grid>
 
-            </Grid>
-            {/* -------------col 2 --------------------------------------------- */}
+                        </Grid>
+                    </Hidden>
+
+                </Grid>
+                {/* -------------col 2 --------------------------------------------- */}
+            </>}
         </Grid >
         {/* Delete Confirm Popup start */}
         <Dialog
@@ -216,6 +223,11 @@ const ProjectView = () => {
             </DialogActions>
         </Dialog>
         {/* Delete Confirm Popup end */}
+        {!contentLoaded && <Grid item xs={12} className={c.skeleton}>
+            <div>
+                <CircularProgress color="secondary" />
+            </div>
+        </Grid>}
     </>
     )
 }

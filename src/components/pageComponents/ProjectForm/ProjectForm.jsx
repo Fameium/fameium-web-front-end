@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
     column2: {
         padding: '20px 10px',
-        
+
 
     },
     TextField: {
@@ -73,8 +73,8 @@ const ProjectForm = () => {
 
     const history = useHistory();
     const { getItem } = utilFunctions;
-    const { post, patch } = api();
-    const { selectedItem } = useContext(MasterContext)
+    const { post, patch, get } = api();
+    const { selectedItem, MasterDispatch } = useContext(MasterContext)
     /**--------------------------------------------------- */
     const [mode, setMode] = useState('N')//Mode of Component - NEW/EDIT project
     /**--------------------------------------------------- */
@@ -85,10 +85,10 @@ const ProjectForm = () => {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [sponsorships, setSponsorships] = useState([])
-    const [status, setStatus] = useState(null)
+    const [status, setStatus] = useState(0)
     const [script, setScript] = useState('')
     /**--------------------------------------------------- */
-    const [personName, setPersonName] = useState([]);
+    const [activeSponsors, setActiveSponsors] = useState([]);
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -102,7 +102,7 @@ const ProjectForm = () => {
     };
 
     const handleChange = (event) => {
-        setPersonName(event.target.value);
+        setActiveSponsors(event.target.value);
     };
 
     // const handleChangeMultiple = (event) => {
@@ -128,15 +128,15 @@ const ProjectForm = () => {
                 if (id === '') setId(selectedItem.id)
                 if (name === '') setName(selectedItem.name)
                 if (description === '') setDescription(selectedItem.description)
-                if (notes === '') setNotes(selectedItem.motes)//SM
+                if (notes === '') setNotes(selectedItem.notes)
                 if (startDate === '') setStartDate(selectedItem.startDate)
                 if (endDate === '') setEndDate(selectedItem.endDate)
                 if (sponsorships === []) setSponsorships(selectedItem.sponsorships)
-                if (status === null) setStatus(selectedItem.status)
+                if (status === 0) setStatus(selectedItem.status)
                 if (script === '') setScript(selectedItem.script)
             }
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedItem])
 
 
@@ -147,60 +147,68 @@ const ProjectForm = () => {
         const body = {
             "name": name,
             "description": description,
-            "motes": notes, //SM
-            // "start_date": startDate,
-            // "end_date": endDate,
-            "script": script
-            //sponsorships - Not handled yet.
+            "notes": notes, //SM
+            "startDate": startDate,
+            "endDate": endDate,
+            "sponsorships": activeSponsors,
+            "script": script,
+            "status": status
         }
         post('projects', params, header, body)
             .then((res) => {
                 history.push('/productivity')
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'success', message: 'Project added succesfully' }})
+
                 console.log('response', res)
             })
             .catch((err) => {
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'error', message: 'Error while adding project.' }})
                 console.log('response', err)
             })
 
 
     }
 
-    
+
     function saveEditProject() {
         const params = { tenant_id: getItem('auth-data').user.tenants[0].id }
         const header = { Authorization: `token ${getItem('auth-data').token}` }
         const body = {
-            "name": name
-            // "description": description,
-            // "motes": notes, //SM
-            // "start_date": startDate,
-            // "end_date": endDate,
-            // "script": script
-            //sponsorships - Not handled yet.
-            // "script": script
+            "name": name,
+            "description": description,
+            "notes": notes, //SM
+            "startDate": startDate,
+            "endDate": endDate,
+            "sponsorships": activeSponsors,
+            "script": script,
+            "status": status
         }
         patch(`projects/${id}`, params, header, body)
             .then((res) => {
                 history.push('/productivity')
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'success', message: 'Project updated succesfully' }})
                 console.log('response', res)
             })
             .catch((err) => {
+                MasterDispatch({ type: 'SET_SNACK_BAR', value: {bool: true, severity: 'error', message: 'Error while updating project.' }})
                 console.log('response', err)
             })
     }
 
-    const names = [
-        'Oliver Hansen',
-        'Van Henry',
-        'April Tucker',
-        'Ralph Hubbard',
-        'Omar Alexander',
-        'Carlos Abbott',
-        'Miriam Wagner',
-        'Bradley Wilkerson',
-        'Virginia Andrews',
-        'Kelly Snyder',
-    ];
+    const params = { tenant_id: getItem('auth-data').user.tenants[0].id }
+    const header = { Authorization: `token ${getItem('auth-data').token}` }
+
+    const [allSponsors, setAllSponsors] = useState([])
+
+
+    useEffect(() => {
+        get(`sponsorships`, params, header, {}).then((res) => {
+            setAllSponsors(res.data.map((e) => e.name))
+        })
+    }, [])
+
+
+
 
 
     function getStyles(name, personName, theme) {
@@ -223,7 +231,7 @@ const ProjectForm = () => {
                     {/* <Grid item xs={12} sm={6} > <Typography variant="caption"> LastdkjfhEdited: 3746286238</Typography> </Grid> */}
                 </Grid>
 
-{/* //uptohe */}
+                {/* //uptohe */}
                 <Grid item container xs={12} sm={6} className={classes.column1} style={{ backgroundColor: '' }}>
                     <Grid item fullWidth xs={12} className={classes.section}> <TextField label="Project Name" color="secondary" fullWidth value={name} onChange={(e) => setName(e.target.value)} /> </Grid>
                     <Grid item fullWidth xs={12} className={classes.section}> <TextField label="Description" multiline className={classes.TextField} color='secondary' fullWidth value={description} onChange={(e) => setDescription(e.target.value)} /> </Grid>
@@ -232,7 +240,7 @@ const ProjectForm = () => {
                     <Hidden smUp >  {/** for mobile  */}
                         <Grid item container xs={12} direction='row' className={classes.section}>
                             <Grid xs={6} item style={{ paddingRight: '20px' }}> <TextField size='small' label="Start Date" variant="outlined" InputLabelProps={{ shrink: true }} type='date' fullWidth className={classes.TextField} color='secondary' value={startDate} onChange={(e) => setStartDate(e.target.value)} /> </Grid>
-                            <Grid xs={6} item style={{ paddingRight: '20px' }}> <TextField size='small' label="Start Date" variant="outlined" InputLabelProps={{ shrink: true }} type='date' fullWidth className={classes.TextField} color='secondary' value={startDate} onChange={(e) => setStartDate(e.target.value)} /> </Grid>
+                            <Grid xs={6} item style={{ paddingRight: '20px' }}> <TextField size='small' label="Start Date" variant="outlined" InputLabelProps={{ shrink: true }} type='date' fullWidth className={classes.TextField} color='secondary' value={endDate} onChange={(e) => setStartDate(e.target.value)} /> </Grid>
                         </Grid>
                         <Grid xs={12} item className={classes.section} style={{ margin: '15px 0px 10px' }} >
                             <FormControl variant='outlined' className={classes.formControl} color="secondary">
@@ -241,14 +249,14 @@ const ProjectForm = () => {
                                     labelId="demo-mutiple-name-label"
                                     id="demo-mutiple-name"
                                     multiple
-                                    value={personName}
+                                    value={activeSponsors}
                                     onChange={handleChange}
                                     input={<Input />}
                                     MenuProps={MenuProps}
 
                                 >
-                                    {names.map((name) => (
-                                        <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+                                    {allSponsors.map((name) => (
+                                        <MenuItem key={name} value={name} style={getStyles(name, activeSponsors, theme)}>
                                             {name}
                                         </MenuItem>
                                     ))}
@@ -268,14 +276,14 @@ const ProjectForm = () => {
                                         labelId="demo-mutiple-name-label"
                                         id="demo-mutiple-name"
                                         multiple
-                                        value={personName}
+                                        value={activeSponsors}
                                         onChange={handleChange}
                                         input={<Input />}
                                         MenuProps={MenuProps}
 
                                     >
-                                        {names.map((name) => (
-                                            <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+                                        {allSponsors.map((name) => (
+                                            <MenuItem key={name} value={name} style={getStyles(name, activeSponsors, theme)}>
                                                 {name}
                                             </MenuItem>
                                         ))}
@@ -297,12 +305,13 @@ const ProjectForm = () => {
                                         onChange={(e) => setStatus(e.target.value)}
                                         label="Age"
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={0}>Scripting</MenuItem>
-                                        <MenuItem value={1}>Production</MenuItem>
-                                        <MenuItem value={2}>Completed</MenuItem>
+                                        <MenuItem value={0}>To-Do</MenuItem>
+                                        <MenuItem value={1}>Planning</MenuItem>
+                                        <MenuItem value={2}>Scripting</MenuItem>
+                                        <MenuItem value={3}>Production</MenuItem>
+                                        <MenuItem value={4}>Editing</MenuItem>
+                                        <MenuItem value={5}>Completed</MenuItem>
+                                        <MenuItem value={6}>published</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
@@ -311,7 +320,7 @@ const ProjectForm = () => {
                     </Hidden>
                 </Grid>
                 {/* --c2 */}
-                <Grid item container xs={12} sm={6}  className={classes.column2} alignContent='flex-start' >
+                <Grid item container xs={12} sm={6} className={classes.column2} alignContent='flex-start' >
                     <Grid item container padding={2} alignItems='center' style={{ marginBottom: '10px' }}>
                         <Grid item xs={2} > <Typography variant='h5' >Script</Typography> </Grid>
                         <Grid item container xs={10} justify='flex-end' >
@@ -319,9 +328,9 @@ const ProjectForm = () => {
                             <Grid item style={{ marginLeft: '10px' }} > <Button variant="outlined" color="secondary" size="small" fullWidth startIcon={<CloudUploadIcon />} >Export</Button> </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} style={{height: '80%'}} > <ReactQuill style={{ height: '100%' }} value={script} onChange={setScript} /> </Grid>
+                    <Grid item xs={12} style={{ height: '80%' }} > <ReactQuill style={{ height: '100%' }} value={script} onChange={setScript} /> </Grid>
                     <Hidden smUp >  {/** for mobile  */}
-                        <Grid item container xs={12} style={{ marginTop: '50px'}} alignItems='flex-end' >
+                        <Grid item container xs={12} style={{ marginTop: '50px' }} alignItems='flex-end' >
                             <Grid item xs={6}>
                                 <FormControl variant="outlined" className={classes.formControl} color='secondary' size='small'>
                                     <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
@@ -332,16 +341,17 @@ const ProjectForm = () => {
                                         onChange={(e) => setStatus(e.target.value)}
                                         label="Age"
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={0}>Scripting</MenuItem>
-                                        <MenuItem value={1}>Production</MenuItem>
-                                        <MenuItem value={2}>Completed</MenuItem>
+                                        <MenuItem value={0}>To-Do</MenuItem>
+                                        <MenuItem value={1}>Planning</MenuItem>
+                                        <MenuItem value={2}>Scripting</MenuItem>
+                                        <MenuItem value={3}>Production</MenuItem>
+                                        <MenuItem value={4}>Editing</MenuItem>
+                                        <MenuItem value={5}>Completed</MenuItem>
+                                        <MenuItem value={6}>published</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={6} style={{paddingLeft: '20px'}}>
+                            <Grid item xs={6} style={{ paddingLeft: '20px' }}>
                                 <Button variant="contained" color="secondary" size="large" varient='filled' className={classes.TextField} fullWidth startIcon={<SaveIcon />} onClick={mode === 'N' ? addProject : saveEditProject} >SAVE</Button>
                             </Grid>
                         </Grid>
