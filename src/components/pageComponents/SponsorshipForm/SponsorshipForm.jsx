@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
-import ProjectFormStyledComponent from './Style'
+// import ProjectFormStyledComponent from './Style'
 import AppHeader from '../../commonComponents/appheader/AppHeader'
 // import theme from '../../../data/theme.json'
-import { Grid, Typography, makeStyles, useTheme, TextField, Button, Input, Hidden } from '@material-ui/core'
+import { Grid, Typography, TextField, Button, Hidden } from '@material-ui/core'
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 // import SaveIcon from '@material-ui/icons/Save'
@@ -15,13 +15,13 @@ import api from '../../../APIs/api'
 import { MasterContext } from '../../../context/MasterContext'
 // import AssistantIcon from '@material-ui/icons/Assistant';
 import SaveIcon from '@material-ui/icons/Save';
-import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+// import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
+// import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 // import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
+// import Select from '@material-ui/core/Select';
 import { useStyles } from './Style'
 
 
@@ -29,7 +29,7 @@ import { useStyles } from './Style'
 const SponsorshipForm = () => {
 
     const classes = useStyles();
-    const theme = useTheme();
+    // const theme = useTheme();
 
     const history = useHistory();
     const { getItem } = utilFunctions;

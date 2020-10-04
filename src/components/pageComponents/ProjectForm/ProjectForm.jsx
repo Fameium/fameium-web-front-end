@@ -205,6 +205,7 @@ const ProjectForm = () => {
         get(`sponsorships`, params, header, {}).then((res) => {
             setAllSponsors(res.data.map((e) => e.name))
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
