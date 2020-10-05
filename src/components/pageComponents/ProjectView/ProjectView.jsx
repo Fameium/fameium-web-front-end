@@ -111,7 +111,7 @@ const ProjectView = () => {
 
 
     return (<>
-        <AppHeader activeTab='productivity' />
+        <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
         <Grid container className={c.mainWrapper} variant="outlined">
             {contentLoaded && <>
                 {/* ------------------ header =-------------------------------- */}

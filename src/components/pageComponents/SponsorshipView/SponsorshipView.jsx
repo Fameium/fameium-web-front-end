@@ -103,7 +103,7 @@ const ProjectView = () => {
 
 
     return (<>
-        <AppHeader activeTab='productivity' />
+        <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
         <Grid container className={classes.mainContainer}>
         {contentLoaded && <>
             <Grid item className={classes.mainTitle} xs={12}><Typography variant="h4">{name}</Typography></Grid>

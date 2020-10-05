@@ -102,7 +102,7 @@ const ProjectView = () => {
 
 
     return (<>
-        <AppHeader activeTab='productivity' />
+        <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
         <Grid container className={classes.mainContainer}>
             {/* col-1 */}{contentLoaded && <>
                 <Grid container item xs={12} sm={6} className={classes.column1} direction='coloumn'>
