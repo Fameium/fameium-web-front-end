@@ -111,7 +111,7 @@ const ProjectView = () => {
 
 
     return (<>
-        <AppHeader activeTab='productivity' />
+        <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
         <Grid container className={c.mainWrapper} variant="outlined">
             {contentLoaded && <>
                 {/* ------------------ header =-------------------------------- */}
@@ -127,21 +127,21 @@ const ProjectView = () => {
                             <Typography style={{ width: '100%' }}  ><b>STATUS : </b>{statusValue}</Typography>
                         </Paper>
                     </Grid>
-                    <Grid item xs={12}>
+                   {description !== '' && <Grid item xs={12}>
                         <Typography variant='h5' className={c.heading} >DESCRIPTION</Typography>
 
                         <Paper className={c.paper} elevation={1}>
                             <Typography>{description}</Typography>
                         </Paper>
                     </Grid>
-
-                    <Grid item xs={12}>
+}
+                    {notes !== '' && <Grid item xs={12}>
                         <Typography variant='h5' className={c.heading}>NOTES</Typography>
 
                         <Paper className={c.paper} elevation={2}>
                             <Typography>{notes}</Typography>
                         </Paper>
-                    </Grid>
+                    </Grid>}
 
                     {/* col-1 row-3 dates */}
                     <Grid item container sm={12} className={c.paper}>
@@ -179,7 +179,7 @@ const ProjectView = () => {
 
                 {/* // -----col 2 ----------------------------------------------- */}
                 <Grid item container xs={12} sm={6} className={c.column2} justify='flex-start' alignContent='flex-start'>
-                    <Typography variant='h5' className={c.heading}>SCRIPT</Typography>
+                    {script !== '' && <> <Typography variant='h5' className={c.heading}>SCRIPT</Typography>
 
                     <Grid item container xs={12}>
                         <Paper className={c.paper} elevation={2} style={{ width: '100%' }} >
@@ -187,6 +187,7 @@ const ProjectView = () => {
                         </Paper>
 
                     </Grid>
+                    </>}
                     <Hidden smUp> {/** for mobile */}
                         <Grid item container sm={12} className={`${c.paper} ${c.mobileOnly}`}>
                             <Grid item > <Button variant="contained" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} onClick={onEditClick} >Edit</Button> </Grid>

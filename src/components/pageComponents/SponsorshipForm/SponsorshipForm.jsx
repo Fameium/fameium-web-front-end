@@ -135,7 +135,7 @@ const SponsorshipForm = () => {
 
     return (
         <>
-            <AppHeader />
+            <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
             <Grid container className={classes.mainContainer} >
                 <Grid item xs={12} className={classes.mainTitle} >
                     <Typography variant='h4'>{mode === 'N' ? 'Add new Sponsorship' : 'Edit sponsorship'}</Typography>

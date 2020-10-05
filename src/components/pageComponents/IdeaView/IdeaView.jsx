@@ -102,22 +102,25 @@ const ProjectView = () => {
 
 
     return (<>
-        <AppHeader activeTab='productivity' />
+        <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
         <Grid container className={classes.mainContainer}>
             {/* col-1 */}{contentLoaded && <>
                 <Grid container item xs={12} sm={6} className={classes.column1} direction='coloumn'>
                     <Grid item className={classes.mainTitle}><Typography variant="h4">{name}</Typography></Grid>
                     <Grid container item direction='column'>
+                        {description !== '' && <>
                         <Typography variant='h5'>Description</Typography>
                         <Paper elevation={2} style={{ width: '100%' }} className={classes.paper}>
                             <Typography variant='body2' className={classes.propertyDescription}>{description}</Typography>
                         </Paper>
-                        <Grid container item className={classes.propertyGroup} direction='column'>
+                        </>}
+
+                       {notes !== '' && <Grid container item className={classes.propertyGroup} direction='column'>
                             <Typography variant='h5'>Notes</Typography>
                             <Paper elevation={2} style={{ width: '100%' }} className={classes.paper}>
                                 <Typography variant='body2' className={classes.propertyDescription}>{notes}</Typography>
                             </Paper>
-                        </Grid>
+                        </Grid>}
                         <Grid container item className={classes.propertyGroup} >
                             <Grid xs={4}><Button variant="outlined" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} onClick={onEditClick} >Edit</Button></Grid>
                             <Grid xs={4}><Button variant="contained" color="secondary" size="large" fullWidth startIcon={<MonetizationOnIcon />} style={{ marginLeft: '10px' }} onClick={() => setShowPopup(true)} >Delete</Button></Grid>

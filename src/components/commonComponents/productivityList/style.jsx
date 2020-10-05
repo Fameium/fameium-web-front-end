@@ -9,7 +9,7 @@ const ProductivityListStyled = styled.div`
             height: 35px;
             margin-bottom: 8px;
             padding: 5px 8px;
-            background-color: #F4F4F4;
+            background-color: #F7F7F7;
             border-radius: 5px;
             cursor: pointer;
             display: flex;
@@ -18,17 +18,20 @@ const ProductivityListStyled = styled.div`
             font-family: ${({ theme }) => theme.secondaryFont };
 
             :hover{
-                background-color: #E8E8E8;
+                background-color: ${({ theme }) => theme.primaryHeaderColor };
+                opacity: 0.8;
+                color: white;
                 box-shadow: 1px 2px #888888;
 
             }
 
             .item__title{
                 font-size: 15px;
-                font-weight: 500;
+                font-weight: 400;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                margin-inline-start: 10px;
             }
         }
     }
