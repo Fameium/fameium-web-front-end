@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 
 const AppHeader = (props) => {
     const { AppHeaderProps = null } = props
+    const { isLoginPage = false } = AppHeaderProps
     const history = useHistory()
 
     const [showDropDown, setShowDropDown] = useState(false)
@@ -33,16 +34,16 @@ const AppHeader = (props) => {
                     <div className="appheader-title">
                         Fameium
                     </div>
-                    <div className="appheader__menu--web">
+                    {!isLoginPage && <div className="appheader__menu--web">
                         <div className={AppHeaderProps && AppHeaderProps.activeTab === 'productivity' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.productivity}</div>
                         <div className={AppHeaderProps && AppHeaderProps.activeTab === 'trendAnalysis' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.trendAnalysis}</div>
                         <div className={AppHeaderProps && AppHeaderProps.activeTab === 'utilities' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.utilities}</div>
                         <div className={AppHeaderProps && AppHeaderProps.activeTab === 'profile' ? 'menu__item menu__item--active' : 'menu__item'} >{labels.profile}</div>
                         <div className="signout" onClick={doSignOutRitual}><SignOutIcon color={theme.primaryHeaderColor} /></div>
-                    </div>
+                    </div>}
                     <div className="hamburger" onClick={() => setShowDropDown(!showDropDown)}>{!showDropDown ? <Hamburger color={theme.primaryHeaderColor} /> : <CloseIcon color={theme.primaryHeaderColor} />}</div>
                 </div>
-                {showDropDown && <div className="appheader__menu--mobile"  >
+                {showDropDown && !isLoginPage && <div className="appheader__menu--mobile"  >
                     <div className={AppHeaderProps && AppHeaderProps.activeTab === 'productivity' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.productivity}</div>
                     <div className={AppHeaderProps && AppHeaderProps.activeTab === 'trendAnalysis' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.trendAnalysis}</div>
                     <div className={AppHeaderProps && AppHeaderProps.activeTab === 'utilities' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.utilities}</div>

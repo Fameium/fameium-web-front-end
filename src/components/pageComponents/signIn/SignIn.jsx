@@ -74,7 +74,7 @@ const SignIn = () => {
 
     return (
         <SignInStyledComponent  >
-            <AppHeader />
+            <AppHeader AppHeaderProps={{ isLoginPage: true }} />
             <div className="login-wrapper">
                 <div className="col-1"></div>
                 <div className="col-2">

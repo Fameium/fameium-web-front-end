@@ -106,7 +106,7 @@ const IdeaForm = () => {
 
     }
     return (<>
-        <AppHeader activeTab='productivity' />
+        <AppHeader AppHeaderProps={{ activeTab: 'productivity' }} />
         <Grid container className={classes.mainContainer}>
             {/* col-1 */}
             <Grid container item xs={12} sm={6}>
