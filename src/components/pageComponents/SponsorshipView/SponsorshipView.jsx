@@ -109,19 +109,19 @@ const ProjectView = () => {
             <Grid item className={classes.mainTitle} xs={12}><Typography variant="h4">{name}</Typography></Grid>
             {/* col-1 */}
             <Grid container item xs={12} sm={6} className={classes.column1} direction='coloumn'>
-                <Grid container item className={classes.propertyGroup} direction='column'>
+                {description !== '' && <Grid container item className={classes.propertyGroup} direction='column'>
                     <Typography variant='h5'>Description</Typography>
                     <Paper elevation={2} style={{ width: '100%' }} className={classes.paper}>
                         <Typography variant='body2' className={classes.propertyDescription}>{description}</Typography>
                     </Paper>
-                </Grid>
+                </Grid>}
 
-                <Grid container item className={classes.propertyGroup} direction='column'>
+               {notes !== '' && <Grid container item className={classes.propertyGroup} direction='column'>
                     <Typography variant='h5'>Notes</Typography>
                     <Paper elevation={2} style={{ width: '100%' }} className={classes.paper}>
                         <Typography variant='body2' className={classes.propertyDescription}>{notes}</Typography>
                     </Paper>
-                </Grid>
+                </Grid>}
 
                 <Grid container item className={classes.propertyGroup} direction='row' style={{ margin: '30px 0px' }}>
                     <Grid item xs={3} >
@@ -162,12 +162,12 @@ const ProjectView = () => {
 
             {/* col-2 */}
             <Grid container item xs={12} sm={6} className={classes.column2} direction='coloumn'>
-                <Grid container item className={classes.propertyGroup} direction='column'>
+                {agreement !== '' && <Grid container item className={classes.propertyGroup} direction='column'>
                     <Typography variant='h5'>Agreement</Typography>
                     <Paper elevation={2} style={{ width: '100%' }} className={classes.paper}>
                         <Typography variant='body2' className={classes.propertyDescription}><div dangerouslySetInnerHTML={{ __html: agreement }} /></Typography>
                     </Paper>
-                </Grid>
+                </Grid>}
 
                 <Hidden smUp>
                     <Grid container item className={classes.propertyGroup} direction='row'>
