@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef, useEffect } from 'react'
 import SignInStyledComponent from './style'
 import { useHistory } from 'react-router-dom';
 import AppHeader from '../../commonComponents/appheader/AppHeader'
@@ -24,6 +24,13 @@ const SignIn = () => {
     const { base64 } = apiSupportFunctions
     const { setItem } = utilFunctions
     const { MasterDispatch } = useContext(MasterContext)
+    const name = useRef(null);
+    const passwordF = useRef(null);
+    const buttonRef = useRef(null);
+
+    useEffect(() => {
+        name.current.focus()
+    }, [])
 
     const onSignInClick = () => {
         // localStorage.setItem('isAuthenticated', true)
@@ -38,13 +45,13 @@ const SignIn = () => {
         //     headers: header
         // };
 
-        post('login', {}, header, {} )
+        post('login', {}, header, {})
             .then((res) => {
                 console.log('res done', res.data)
                 setShowLoading(false)
                 if (res.status === 200) {
 
-                    setItem('auth-data',  res.data)
+                    setItem('auth-data', res.data)
                     MasterDispatch({ type: 'SET_TOKEN', value: res.data.token })
                     MasterDispatch({ type: 'SET_TOKEN_HEADER', value: { Authorization: `token ${res.data.token}` } })
                     MasterDispatch({ type: 'SET_PROFILE', value: res.data.user })
@@ -72,23 +79,34 @@ const SignIn = () => {
 
 
 
+    const enterClick = (event, current) => {
+        console.log(event, name)
+        if (event.keyCode === 13 && current === 'name') {
+            passwordF.current.focus();
+        }
+        else if (event.keyCode === 13 && current === 'password') {
+            onSignInClick()
+        }
+    }
+
+
     return (
         <SignInStyledComponent  >
             <AppHeader />
             <div className="login-wrapper">
                 <div className="col-1"></div>
                 <div className="col-2">
-                    <TextField fullWidth id="outlined-basic" color="secondary" label="Username" variant="outlined" className='field' value={userName} onChange={(e) => setUserName(e.target.value)} />
-                    <TextField fullWidth id="outlined-basic" color="secondary" label="password" variant="outlined" type='password' className='field' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <TextField fullWidth inputRef={name} onKeyDown={(e) => enterClick(e, 'name')} id="outlined-basic" color="secondary" label="Username" variant="outlined" className='field' value={userName} onChange={(e) => setUserName(e.target.value)} />
+                    <TextField fullWidth inputRef={passwordF} onKeyDown={(e) => enterClick(e, 'password')} id="outlined-basic" color="secondary" label="password" variant="outlined" type='password' className='field' value={password} onChange={(e) => setPassword(e.target.value)} />
 
-                    <Button variant="contained" color="secondary" className='login-button field' onClick={onSignInClick} > Login </ Button>
+                    <Button ref={buttonRef} variant="contained" color="secondary" className='login-button field' onClick={onSignInClick} > Login </ Button>
                     {showLoading && <CircularProgress color="secondary" />}
                     <Snackbar
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                         open={showSnackbar}
                         onClose={handleClose}
                         message="Oops! Wrong credentials"
-                        
+
                     />
                 </div>
             </div>
