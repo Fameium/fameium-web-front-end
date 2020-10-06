@@ -11,7 +11,8 @@ import utilFunctions from '../../../utilityFunctions/localStorage'
 
 const Productivity = () => {
 
-    const [activeTab, setActiveTab] = useState('project')
+    const { getItem, setItem } = utilFunctions
+    const [activeTab, setActiveTab] = useState(getItem('activeTab') || 'project')
     const [dataForMobileView, setDataForMobileView] = useState(null)
     const [projects, setProjects] = useState(null)
     const [ideas, setIdeas] = useState(null)
@@ -19,7 +20,6 @@ const Productivity = () => {
     const history = useHistory()
     const { get } = api()
     // const { MasterDispatch, tokenHeader, activeTenant, productivityData } = useContext(MasterContext)
-    const { getItem } = utilFunctions
 
     // let projectData = {}
     let params = { tenant_id: getItem('auth-data').user.tenants[0].id }
@@ -29,7 +29,9 @@ const Productivity = () => {
         if(!projects || !ideas || !sponsorships) get('productivity', params, header, {} ).then((res) => {
             console.log('RES', res )
             setProjects(res.data.projects)
-            setDataForMobileView(res.data.projects)
+            if(activeTab === 'project') setDataForMobileView(res.data.projects)
+            else if(activeTab === 'idea') setDataForMobileView(res.data.ideas)
+            else if(activeTab === 'sponsorship') setDataForMobileView(res.data.sponsorships)
             setIdeas(res.data.ideas)
             setSponsorships(res.data.sponsorships) //SM
         }).catch((error) => {
@@ -41,7 +43,9 @@ const Productivity = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
-    
+    useEffect(() => {
+        setItem('activeTab', activeTab)
+    }, [activeTab, setItem])
 
     useEffect(() => { //This is applicable only in mobile view
         if (activeTab === 'project') {
@@ -49,7 +53,6 @@ const Productivity = () => {
         }
         if (activeTab === 'idea') {
             setDataForMobileView(ideas)
-
         }
         if (activeTab === 'sponsorship') {
             setDataForMobileView(sponsorships)
