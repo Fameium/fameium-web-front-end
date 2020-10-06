@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -19,10 +19,18 @@ import Test from './Test'
 import MasterContextProvider from '../src/context/MasterContext'
 // import { MasterContext } from '../src/context/MasterContext'
 import SnackBar from '../src/components/commonComponents/SnackBar'
+import utilFunctions from '../src/utilityFunctions/localStorage.js'
+
 
 
 
 const App = () => {
+
+  const { getItem } = utilFunctions
+
+  useEffect(() => {
+    if(getItem('activeTab')) window.localStorage.removeItem('activeTab')
+  },[getItem])
 
   const theme = createMuiTheme({
     palette: {
