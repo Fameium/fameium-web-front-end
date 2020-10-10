@@ -9,8 +9,8 @@ const AppHeaderStyledComponent = styled.div`
         justify-content: center;
         width: 100vw;
         height: 50px;
-        border-bottom: 1px solid ${({ theme }) => theme.headerBorder };
-        background-color: ${({ theme }) => theme.headerBackground };
+        border-bottom: 1px solid ${({ theme }) => theme.headerBorder};
+        background-color: ${({ theme }) => theme.headerBackground};
         z-index: 5;
 
         
@@ -24,11 +24,11 @@ const AppHeaderStyledComponent = styled.div`
                 cursor: pointer;
             }
             .appheader-title{
-                font-family: ${({ theme }) => theme.titleFont };
+                font-family: ${({ theme }) => theme.titleFont};
                 padding-left: 10px;
                 font-weight: 300;
                 font-size: 30px;
-                color: ${({ theme }) => theme.primaryHeaderColor };
+                color: ${({ theme }) => theme.primaryHeaderColor};
                 cursor: pointer;
             }
         
@@ -39,27 +39,28 @@ const AppHeaderStyledComponent = styled.div`
                 align-items: center;
                 margin-left: auto;
                 margin-right: 15px;
-                font-family: ${({ theme }) => theme.primaryFont };
-                color:  ${({ theme }) => theme.secondaryHeaderColor };
+                font-family: ${({ theme }) => theme.primaryFont};
+                color:  ${({ theme }) => theme.secondaryHeaderColor};
 
                 @media screen and (max-width: 900px){
                     display: none;
                 }
             
                 .menu__item{
+                    position: relative;
                     margin-right: 10px;
                     font-weight: 600;
                     padding: auto 0px;
                     cursor: pointer;
 
                     :hover{
-                        color: ${({ theme }) => theme.primaryHeaderColor };
+                        color: ${({ theme }) => theme.primaryHeaderColor};
                     }
                 }
 
             }
             .menu__item--active{
-                color: ${({ theme }) => theme.primaryHeaderColor };
+                color: ${({ theme }) => theme.primaryHeaderColor};
             }
 
             .signout{
@@ -69,7 +70,7 @@ const AppHeaderStyledComponent = styled.div`
 
                 :hover{
                     path{
-                        fill: ${({ theme }) => theme.secondaryHeaderColor };
+                        fill: ${({ theme }) => theme.secondaryHeaderColor};
                     }
 
                 }
@@ -98,6 +99,7 @@ const AppHeaderStyledComponent = styled.div`
             z-index: 3;
 
             .menu__item{
+                position: relative;
                 width: 100vw;
                 border-bottom: 1px solid grey;
                 padding-top: 15px;
@@ -106,11 +108,28 @@ const AppHeaderStyledComponent = styled.div`
                 font-weight: 600;
             }
             .menu__item--active{
-                color: ${({ theme }) => theme.primaryHeaderColor };
+                color: ${({ theme }) => theme.primaryHeaderColor};
                 font-weight: 900;
             }
         }
 
+    }
+    
+    .beta-tag {
+        position: absolute;
+        height: 10px;
+        width: 30px;
+        background-color: #1ecf01;
+        color: white;
+        font-family: var(--primary-font);
+        font-weight: 600;
+        font-size: 6px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom: -8px;
+        right: -8px;
     }
 
     
