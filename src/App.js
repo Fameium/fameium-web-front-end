@@ -21,6 +21,8 @@ import MasterContextProvider from '../src/context/MasterContext'
 import SnackBar from '../src/components/commonComponents/SnackBar'
 import utilFunctions from '../src/utilityFunctions/localStorage.js'
 
+import TrendHome from '../src/components/pageComponents/Trend/TrendHome'
+
 
 
 
@@ -81,6 +83,7 @@ const App = () => {
               <Route exact path='/productivity/sponsorship/:id/edit' component={SponsorshipForm} />
               <Route exact path='/productivity/sponsorship/:id/view' component={SponsorshipView} />
 
+              <Route exact path='/trend' component={TrendHome} />
 
               <Route exact path='/test' component={Test} />
               <Route render={() => <Redirect to={{ pathname: "/" }} />} />
