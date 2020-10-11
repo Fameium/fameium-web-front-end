@@ -1,0 +1,97 @@
+.apps-home-wrapper {
+    /* margin-top: 60px; */
+    margin: 60px 31px 100px 31px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.app {
+    max-width: 357px;
+    min-width: 357px;
+    height: 298px;
+    border: 1px solid rgba(0, 0, 0, 0.17);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 31px;
+    margin-right: 31px;
+    margin-top: 62px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: alias;
+    flex: 1;
+}
+
+@media (max-width: 1330px) {
+    .app { min-width: 280px }
+}
+
+@media (max-width: 900px) {
+    .app { min-width: 200px; }
+}
+
+@media (max-width: 700px) {
+    .app {  min-width: 80vw;  }
+    .apps-home-wrapper { margin-left: 0px }
+
+}
+
+.app:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.08);
+}
+
+.app > .bottom-bar {
+    height: 25%;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+
+.app.a > .bottom-bar {
+    background: rgba(172, 0, 124, 0.81);
+}
+.app.b > .bottom-bar {
+    background: rgba(96, 0, 172, 0.83);
+}
+.app.c > .bottom-bar {
+    background: rgba(222, 0, 0, 0.81);
+}
+
+.app > .bar-title {
+    position: absolute;
+    bottom: 34px;
+    font-family: var(--primary-font);
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    margin: 0 auto;
+}
+
+.app > .bar-sub-title {
+    position: absolute;
+    bottom: 19px;
+    font-family: var(--primary-font);
+    font-weight: 700;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.76);
+    margin: 0 auto;
+}
+
+
+.app-illustration {
+    margin-top: 58px;
+}
+
+.app.z {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    background-color: var(--primary-color);
+}
+
+.app.z > .app-illustration {
+    margin-top: 0px;
+}
