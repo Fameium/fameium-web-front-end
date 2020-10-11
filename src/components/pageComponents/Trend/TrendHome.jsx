@@ -192,7 +192,7 @@ const TrendHome = () => {
                 {
                     showLoader && <div className="loading-wrapper">
                         <TrendLoading className='trend-loading-logo' style={{ width: '257', height: '198px' }} />
-                        <div className="trending-title">Please wait...</div>
+                        <div className="trending-title">Crunching data for you! Hold on for a sec...</div>
                     </div>
                 }
             </div>
