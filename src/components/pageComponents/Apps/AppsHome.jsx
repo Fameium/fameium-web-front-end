@@ -27,7 +27,7 @@ const AppHome = () => {
                         <AppArtB />
                     </div>
                     <div className="bottom-bar" />
-                    <div className="bar-title">Brand Name Generator</div>
+                    <div className="bar-title">Brand Identity on Web</div>
                     <div className="bar-sub-title">Get unique simple online identity</div>
                 </div>
                 <div className="app c">
@@ -35,7 +35,7 @@ const AppHome = () => {
                         <AppArtC />
                     </div>
                     <div className="bottom-bar" />
-                    <div className="bar-title">Brand Name Generator</div>
+                    <div className="bar-title">Thumbnail Templates</div>
                     <div className="bar-sub-title">Get unique simple online identity</div>
                 </div>
                 {/* <div className="app d"></div> */}
