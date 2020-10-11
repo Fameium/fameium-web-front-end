@@ -31,6 +31,9 @@ const AppHeader = (props) => {
             case 1:
                 history.push('/trend')
                 break;
+            case 2:
+                history.push('/apps')
+                break;
             default:
                 break;
         }
@@ -50,7 +53,7 @@ const AppHeader = (props) => {
                     {!isLoginPage && <div className="appheader__menu--web">
                         <div onClick={() => handleHeaderMenuClick(0)} className={AppHeaderProps && AppHeaderProps.activeTab === 'productivity' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.productivity}</div>
                         <div onClick={() => handleHeaderMenuClick(1)} className={AppHeaderProps && AppHeaderProps.activeTab === 'trendAnalysis' ? 'menu__item menu__item--active' : 'menu__item'}><div className="beta-tag">BETA</div>{labels.trendAnalysis}</div>
-                        <div className={AppHeaderProps && AppHeaderProps.activeTab === 'utilities' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.utilities}</div>
+                        <div onClick={() => handleHeaderMenuClick(2)} className={AppHeaderProps && AppHeaderProps.activeTab === 'utilities' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.utilities}</div>
                         <div className={AppHeaderProps && AppHeaderProps.activeTab === 'profile' ? 'menu__item menu__item--active' : 'menu__item'} >{labels.profile}</div>
                         <div className="signout" onClick={doSignOutRitual}><SignOutIcon color={theme.primaryHeaderColor} /></div>
                     </div>}
@@ -59,7 +62,7 @@ const AppHeader = (props) => {
                 {showDropDown && !isLoginPage && <div className="appheader__menu--mobile"  >
                     <div onClick={() => handleHeaderMenuClick(0)} className={AppHeaderProps && AppHeaderProps.activeTab === 'productivity' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.productivity}</div>
                     <div onClick={() => handleHeaderMenuClick(1)} className={AppHeaderProps && AppHeaderProps.activeTab === 'trendAnalysis' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.trendAnalysis}</div>
-                    <div className={AppHeaderProps && AppHeaderProps.activeTab === 'utilities' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.utilities}</div>
+                    <div onClick={() => handleHeaderMenuClick(2)} className={AppHeaderProps && AppHeaderProps.activeTab === 'utilities' ? 'menu__item menu__item--active' : 'menu__item'}>{labels.utilities}</div>
                     <div className={AppHeaderProps && AppHeaderProps.activeTab === 'profile' ? 'menu__item menu__item--active' : 'menu__item'} >{labels.profile}</div>
                     <div className="signout menu__item" onClick={doSignOutRitual}><SignOutIcon color={theme.primaryHeaderColor} /></div>
                 </div>}

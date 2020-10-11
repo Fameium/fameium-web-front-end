@@ -20,7 +20,7 @@ import MasterContextProvider from '../src/context/MasterContext'
 // import { MasterContext } from '../src/context/MasterContext'
 import SnackBar from '../src/components/commonComponents/SnackBar'
 import utilFunctions from '../src/utilityFunctions/localStorage.js'
-
+import AppsHome from '../src/components/pageComponents/Apps/AppsHome'
 import TrendHome from '../src/components/pageComponents/Trend/TrendHome'
 
 
@@ -84,6 +84,7 @@ const App = () => {
               <Route exact path='/productivity/sponsorship/:id/view' component={SponsorshipView} />
 
               <Route exact path='/trend' component={TrendHome} />
+              <Route exact path='/apps' component={AppsHome} />
 
               <Route exact path='/test' component={Test} />
               <Route render={() => <Redirect to={{ pathname: "/" }} />} />
